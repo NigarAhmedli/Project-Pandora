@@ -6,11 +6,14 @@ import { CiUser } from "react-icons/ci";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { useNavigate } from 'react-router-dom';
 import { PiUserCircleThin } from "react-icons/pi";
+import Drawer from 'react-modern-drawer'
+import 'react-modern-drawer/dist/index.css'
+import { HiOutlineBars3 } from "react-icons/hi2";
 
 
 const Header = () => {
 
- const [isOpen, setIsOpen] = React.useState(false)
+    const [isOpen, setIsOpen] = React.useState(false)
     const toggleDrawer = () => {
         setIsOpen((prevState) => !prevState)
     }
@@ -71,8 +74,33 @@ const Header = () => {
           <div onClick={goToBasket} className={style.icon} >
                 <LiaShoppingBagSolid />
           </div>
+        
       
         </div>
+
+         <div className={style.navbar}>
+                        <button onClick={toggleDrawer}><HiOutlineBars3 /></button>
+                        <Drawer
+                            open={isOpen}
+                            onClose={toggleDrawer}
+                            direction='right'
+                            className='bla bla bla'
+                        >
+                            <div className={style.navcontent}>
+                                <ul>
+                                    <li><a href="/profile">Profile <PiUserCircleThin /> </a></li>
+                                    <li><a href="/register">User <CiUser /> </a></li>
+                                    <li><a href="/wishlist">Wishlist <PiHeartLight /></a></li>
+                                    <li><a href="/basket">  Basket <LiaShoppingBagSolid /> </a></li>
+                                    <li><a href="/charms">Charms</a></li>
+                                    <li><a href="/bracelet">Bracelets</a></li>
+                                    <li><a href="/necklaces">Necklaces</a></li>
+                                    <li><a href="/collection">Collections</a></li>
+
+                                </ul>
+                            </div>
+                        </Drawer>
+                    </div>
       </div>
       </div>
 

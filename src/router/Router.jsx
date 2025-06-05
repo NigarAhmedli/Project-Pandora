@@ -13,7 +13,6 @@ import CharmSec from "../pages/home/addSection/charmSec/CharmSec";
 import BraceletSec from "../pages/home/addSection/braceletSec/BraceletSec";
 import RingSec from "../pages/home/addSection/ringsSec/RingSec";
 import NecklacesSec from "../pages/home/addSection/necklacesSec/NecklacesSec";
-import Collection from "../pages/home/addSection/collectionsSec/container/collection/Collection";
 import RegisterContent from "../pages/home/addSection/register/RegisterContent";
 import LoginSec from "../pages/home/addSection/login/LoginSec";
 import DetailPage from "../pages/home/addSection/detailPage/DetailPage";
@@ -22,6 +21,7 @@ import Profile from "../pages/home/addSection/profile/Profile";
 import Payment from "../pages/home/addSection/payment/Payment";
 import Succes from "../pages/home/addSection/payment/succes/Succes";
 import NotFound from "../pages/home/notFound/NotFound";
+import CollectionSec from "../pages/home/addSection/collectionsSec/CollectionSec";
 
 const Router = () => {
   return (
@@ -41,7 +41,7 @@ const Router = () => {
           <Route path="/bracelet" element={<BraceletSec />} />
           <Route path="/rings" element={<RingSec />} />
           <Route path="/necklaces" element={<NecklacesSec />} />
-          <Route path="/collection" element={<Collection />} />
+          <Route path="/collection" element={<CollectionSec/>} />
           <Route path="/register" element={<RegisterContent />} />
           <Route path="/login" element={<LoginSec />} />
           <Route path="/product/:id" element={<DetailPage />} />
