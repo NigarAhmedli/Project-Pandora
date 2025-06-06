@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+
+  .content {
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex-direction: column;
+    height: 100%;
+    width: 43%;
+
+    span {
+      font-size: 48px;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    p {
+      font-size: 24px;
+    }
+
+    .txt {
+      width: 270px;
+      height: 1px;
+      background-color: rgb(255, 147, 160);
+    }
+
+    img {
+      width: 100%;
+      height: 400px;
+    }
+  }
+}
+
+// 300-700px arası ekranlar üçün
+@media screen and (max-width: 700px) and (min-width: 300px) {
+  .container {
+    height: auto;
+    padding: 20px;
+
+    .content {
+      width: 100%;
+      span {
+        font-size: 32px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      img {
+        height: auto;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+// 700-1024px arası ekranlar üçün
+@media screen and (max-width: 1024px) and (min-width: 700px) {
+  .container {
+    height: auto;
+    padding: 40px;
+
+    .content {
+      width: 80%;
+      span {
+        font-size: 40px;
+      }
+
+      p {
+        font-size: 20px;
+      }
+
+      img {
+        height: 350px;
+        margin-top: 20px;
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import style from './TwoSec.module.scss'
 
 const TwoSec = () => {
   return (
