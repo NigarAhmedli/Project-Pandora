@@ -12,29 +12,29 @@ const Footer = () => {
       <div className={styles.cards}>
         <div className={styles.card}>
           <p>SHOP</p>
-          <a href="">Charms</a>
-          <a href="">Bracelets</a>
-          <a href="">Rings</a>
-          <a href="">Necklaces & Pendants</a>
+          <a href="/charms">Charms</a>
+          <a href="/bracelet">Bracelets</a>
+          <a href="/rings">Rings</a>
+          <a href="/necklaces">Necklaces & Pendants</a>
           <a href="">Earrings</a>
           <a href="">Lab-Grown Diamonds</a>
         </div>
         <div className={styles.card}>
           <p>SERVICES</p>
-          <a href="">My Pandora</a>
-          <a href="">Basket</a>
-          <a href="">Wishlist</a>
-          <a href="">Login</a>
+          <a href="/about">My Pandora</a>
+          <a href="/basket">Basket</a>
+          <a href="/wishlist">Wishlist</a>
+          <a href="/login">Login</a>
+          <a href="/cares">Pandora Cares</a>
           <a href="">Engraving</a>
-          <a href="">Pandora Cares</a>
         </div>
         <div className={styles.card}>
           <p>ABOUT US</p>
           <a href="/about">About Pandora</a>
-          <a href="">News & Investor Relations</a>
-          <a href="">Sustainability</a>
+          <a href="/termscon">Terms Conditions</a>
+          <a href="/cares">Cares</a>
+          <a href="">Cookie Policy</a>
           <a href="">Craftsmanship</a>
-          <a href="">Careers</a>
           <a href="">Store Finder</a>
         </div>
       </div>

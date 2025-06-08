@@ -1,9 +1,58 @@
 import React from 'react'
+import styles from './TwoTerms.module.scss'
 
 const TwoTerms = () => {
   return (
-    <div>TwoTerms</div>
+    <div className={styles.container}>
+      <div className={styles.content}>
+
+      
+      <h2>PANDORA TERMS OF USE</h2>
+      
+      <p>Your access and use of the web sites on which these terms reside (including, without limitation, versions of such websites optimized for mobile) (collectively, the "Site"), and the content and services at this Site are subject to these Terms of Use (or “Terms”), which we may update from time to time. Please read these Terms carefully before accessing or using this Site. The Site is owned or controlled by PANDORA EComm, LLC (or "Pandora"). By accessing or using this Site in any way, including, without limitation, browsing this Site, using any services, and/or submitting information to Pandora, you agree to and are bound by the terms, conditions, policies and notices contained in these Terms, including, but not limited to, conducting this transaction electronically, disclaimers of warranties, damage and remedy exclusions and limitations, binding arbitration, a jury trial waiver, and a choice of Maryland law. In arbitration, there is no judge or jury and there is less discovery and appellate review than in court.</p>
+<p>The terms "we," "us" and "our" refer to Pandora and any of our affiliated companies as appropriate to the context. "You" refers to any person accessing or using the Site. You and we are each referred to as “party” and are together referred to as “parties.”</p>
+<p>From time to time we may update this Site and these Terms. Your access and use of this Site after we post any changes to these Terms constitutes your agreement to those changes. You agree to review these Terms periodically to ensure that you are familiar with the most recent version. Pandora may, in its sole discretion, and at any time, discontinue this Site or any part thereof, with or without notice, or may prevent your use of this Site with or without notice to you. You agree that you do not have any rights in this Site and that Pandora will have no liability to you if this Site is discontinued or your ability to access the Site or any content you may have posted on the Site is terminated.</p>
+
+
+<div className={styles.text}>
+  <span>Pandora Content</span>
+<p>Content on this Site that is provided by Pandora or its licensors, including certain graphics, photographs, images, screen shots, text, digitally downloadable files, trademarks, logos, product and program names, slogans, and the compilation of the foregoing ("Pandora Content") is the property of Pandora and its licensors, and is protected under trademark, copyright, and other intellectual property laws. Nothing contained on this Site should be construed as granting any license or right to download or use any Pandora Content.</p>
+<p>You agree not to download, display or use any Pandora Content located on the Site for any commercial or non-commercial purpose, in connection with products or services that are not those of Pandora, in any other manner that is likely to cause confusion among consumers, that disparages or discredits Pandora and/or its licensors, that dilutes the strength of Pandora's or its licensor's property, or that otherwise infringes Pandora's or its licensors intellectual property rights. You further agree to in no other way misuse any Pandora Content that appears on this Site.</p>
+
+</div>
+<div className={styles.text}>
+<span>Use of the Site and Posting Policy</span>
+
+<p>The following requirements apply to your use of the Site: (a) you will not use any electronic communication feature of the Site for any purpose that is unlawful, tortious, abusive, intrusive on another's privacy, harassing, libelous, defamatory, embarrassing, obscene, threatening, or hateful, all as determined by Pandora in its sole and absolute discretion; (b) you will not upload, post, reproduce, or distribute any information, software, or other material protected by copyright or any other intellectual property right (as well as rights of publicity and privacy) without first obtaining the permission of the owner of such rights; (c) you will not collect or store personal data about other users; (d) you will not use the Site for any commercial purpose not expressly approved by Pandora in writing; (e) you will not upload, post, email, or otherwise transmit any advertising or promotional materials or any other form of solicitation or unauthorized communication via the Site; and (f) you will not upload, post, email, or otherwise transmit any material that contains viruses or any other computer code, files, or programs which might interrupt, limit, or interfere with the functionality of the Site or any computer software or hardware or telecommunications equipment.</p>
+<p>From time to time on certain areas of our Site you may be able to submit product reviews, questions, written posts/responses, images, and certain other materials ("User Content"). By using these features, you agree that you will not submit or post any content that is unlawful, harmful, tortious, defamatory, libelous, obscene, invasive of the privacy of another person, threatening, harassing, abusive, hateful, racist, infringing, pornographic, violent or otherwise objectionable or inappropriate as determined by Pandora; that you will not submit or post any content that contains personal information about any individual, violates the privacy/publicity of any other individual or entity, or includes anything that you are under a contractual obligation to keep private or confidential; that you will not impersonate any person or organization, including without limitation, the personnel of Pandora, or misrepresent an affiliation with another person or organization; and that you will not submit or post any content that contains viruses, corrupted files, or any other similar software or programs that may adversely affect the operation of the Site, or feature of the Site.</p>
+<p>You further understand and agree that you have no ownership rights to any account you may have with us or other access to the Site, your User Content, or other features therein. Pandora may cancel your account and delete all User Content associated with your account at any time, and without notice, if Pandora deems that you have violated these Terms, the law, or for any other reason. Pandora assumes no liability for any information removed from our Site, and reserves the right to permanently restrict access to the Site or a user account. For greater certainty, and without limiting the effect of the foregoing, Pandora reserves the right, in its sole and absolute discretion, to modify, edit or remove any User Content, or to request a user to modify or edit his or her User Content, if a complaint or notice of allegedly infringing materials is received with respect to the User Content, or for any other reason.</p>
+<p>By displaying, publishing, submitting or otherwise posting any User Content on or through the Site, you hereby irrevocably grant to Pandora a non-exclusive, fully sub-licensable, non-revocable, perpetual, worldwide, fully-paid, royalty free license to use, modify, publicly perform, publicly display, broadcast, publish, reproduce, and distribute such User Content in any and all media now known or hereinafter developed without the requirement to make payment to you or to any third party or the need to seek your or any third party permission. Further, you waive all moral rights in and to all User Content that you post, upload or otherwise submit to or through, the Site in favor of Pandora. This license and waiver of rights includes the right to host, index, cache, distribute, and tag any User Content, as well as the right to sublicense User Content to third parties, including other users, for use on other media or platforms known or hereinafter developed, such as for use on mobile phones, or in video, music, software or other computer programs.</p>
+<p>You continue to retain all ownership rights you hold in your User Content, and you retain any right to use your User Content in any way you choose, subject to these Terms and the license described herein. You represent and warrant that you own all of the User Content submitted, displayed, published or posted by you on the Site and otherwise have the right to grant the license set forth herein, and the displaying, publishing or posting of any content you submit, and our use thereof does not and will not violate the privacy rights, publicity rights, copyrights, trademark rights, patents, contract rights or any other intellectual property rights or other rights of any person or entity.</p>
+<p>You agree to indemnify and hold Pandora, its parents, subsidiaries, officers, employees, and website contractors and each of their officers, employees and agents harmless from any claims, damages and expenses, including reasonable attorneys' fees and costs, related to your violation of these Terms, including the above Posting Policy, or any violations thereof by your dependents or agents, or which arises from the use of any content including User Content that you submitted, posted, or otherwise provided to Pandora or this Site.</p>
+
+</div>
+
+<div className={styles.text}>
+<span>Intellectual Property Infringement Notification</span>
+<p>If you are a trademark or copyright owner and you believe that your rights have been violated in any way, please complete and submit a signed copy of the form available here, and send to our designated agent: Matthew Scott, 250 West Pratt Street, 17th Floor, Baltimore, MD 21201; by fax at (443) 537-2092; or by email to USeComCopyright@pandora.net. Our agent information is provided pursuant to the Digital Millennium Copyright Act, 17 U.S.C. § 512(c)(2).</p>
+
+</div>
+
+<div className={styles.text}>
+<span>Rules for Promotions</span>
+<p>Any sweepstakes, contests, or other promotions (collectively, “Promotions”) made available through the Site may be governed by rules that are separate from these Terms. If you participate in any Promotions, please review the applicable Official Rules as well as our Privacy Policy . If the Official Rules for a Promotion conflict with these Terms, the Promotion Official Rules will apply.</p>
+
+</div>
+<div className={styles.text}>
+<span>Accounts, Passwords, and Security</span>
+<p>Certain areas of the Site require registration or otherwise ask you to provide information to participate in certain features or access certain content. If you elect not to provide such information, you may not be able to access certain content or participate in certain features of the Site.</p>
+<p>If the Site requires you to create an account or otherwise submit information, you must complete the specified process by providing us with current, complete, and accurate information as requested by the applicable registration form. It is your responsibility to maintain the currency, completeness, and accuracy of your registration data, and any loss caused by your failure to do so is your responsibility. During the registration process, you will be asked to enter your name and valid e-mail address and choose a password. It is entirely your responsibility to maintain the confidentiality of your password and account. Additionally, you are entirely responsible for any and all activities that occur under your account. You agree to notify Pandora immediately of any unauthorized use of your account. You further agree not to email, post, or otherwise disseminate any user ID, password, or other information which provides you access to the Site. Pandora is not liable for any loss that you may incur as a result of someone else using your password or account, either with or without your knowledge, and is not responsible for any delay in shutting down your account after you have reported a breach of security to us.</p>
+
+</div>
+</div>
+
+    </div>
   )
 }
 
-export default TwoTerms
+export default TwoTerms;
