@@ -28,16 +28,21 @@ const AdminSec = () => {
   };
 
   // Axtarış və Sortlama
-  const filteredProducts = products
-    ?.filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()))
-    ?.sort((a, b) => {
-      if (sortBy === 'price') {
-        return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
-      } else if (sortBy === 'title') {
-        return sortOrder === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
-      }
-      return 0;
-    });
+const filteredProducts = products
+  ?.filter((item) =>
+    item?.title?.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+  ?.sort((a, b) => {
+    if (sortBy === 'price') {
+      return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
+    } else if (sortBy === 'title') {
+      return sortOrder === 'asc'
+        ? a.title.localeCompare(b.title)
+        : b.title.localeCompare(a.title);
+    }
+    return 0;
+  });
+
 
   const getSortButtonLabel = () => {
     if (sortBy === 'price') {

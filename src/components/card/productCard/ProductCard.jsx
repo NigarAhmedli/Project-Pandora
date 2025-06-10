@@ -34,12 +34,10 @@ const ProductCard = ({ item, AddBasket, AddWishlist }) => {
           <div className={styles.buttons}>
             <button onClick={(event) => handleAddToWishlist(event)}>
               <FaRegHeart />
-              {addedToWishlist && <span className={styles.added}>Add</span>}
             </button>
 
             <button onClick={(event) => handleAddToBasket(event)}>
               <HiOutlineShoppingBag />
-              {addedToBasket && <span className={styles.added}>Add</span>}
             </button>
 
           </div>

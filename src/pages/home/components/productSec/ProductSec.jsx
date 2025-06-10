@@ -33,7 +33,7 @@ const ProductSec = () => {
 
   // Pagination logic
   const [page, setPage] = useState(1)
-  const [productsPage, setProductsPage] = useState(4)
+  const [productsPage, setProductsPage] = useState(8)
 
   const lastProductIndex = page * productsPage
   const firstProductIndex = lastProductIndex - productsPage
@@ -68,13 +68,17 @@ const ProductSec = () => {
   ))}
 </div>
 
-      <div className={styles.onclick}>
-        {dummy && dummy.map(item => (
-          <button className={styles.buttons} onClick={() => setPage(item)} key={item}>
-            {item}
-          </button>
-        ))}
-      </div>
+<div className={styles.paginationDots}>
+  {dummy.map((item) => (
+    <span
+      key={item}
+      className={`${styles.dot} ${page === item ? styles.active : ''}`}
+      onClick={() => setPage(item)}
+    ></span>
+  ))}
+</div>
+
+
     </div>
   )
 }

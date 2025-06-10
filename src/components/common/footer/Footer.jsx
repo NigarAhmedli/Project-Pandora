@@ -16,7 +16,7 @@ const Footer = () => {
           <a href="/bracelet">Bracelets</a>
           <a href="/rings">Rings</a>
           <a href="/necklaces">Necklaces & Pendants</a>
-          <a href="">Earrings</a>
+          <a href="/adminpanel">Earrings</a>
           <a href="">Lab-Grown Diamonds</a>
         </div>
         <div className={styles.card}>
