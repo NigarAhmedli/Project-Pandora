@@ -18,10 +18,15 @@ export const deleteProductThunk = createAsyncThunk('products/delete', async (id)
 
 
 export const addFormikThunk = createAsyncThunk('api/formik', async (data) => {
-    const response = await axios.post('http://localhost:5000/products', data)
-    return response.data;
+  const endpoint =
+    data.category === "charms"
+      ? "http://localhost:5000/charms"
+      : "http://localhost:5000/products";
 
-})
+  const response = await axios.post(endpoint, data);
+  return response.data;
+});
+
 
 
 export const fetchProductDetails = createAsyncThunk(

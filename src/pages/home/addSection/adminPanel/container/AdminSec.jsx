@@ -4,10 +4,12 @@ import { addFormikThunk, deleteProductThunk, getProductsThunk } from '../../../.
 import styles from './AdminSec.module.scss';
 import { useFormik } from 'formik';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { deleteCharmsThunk, getCharmsThunk } from '../../../../../redux/reducers/charmsSlice';
 
 const AdminSec = () => {
   const dispatch = useDispatch();
 
+  const charms = useSelector((state) => state.charms.charms);
   const products = useSelector((state) => state.products.products);
   const loading = useSelector((state) => state.products.loading);
   const error = useSelector((state) => state.products.error);
@@ -15,34 +17,45 @@ const AdminSec = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
   const [sortBy, setSortBy] = useState('price');
-  const [isFormVisible, setIsFormVisible] = useState(false); // Formun görünürlüğünü idarə edən state
-
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   const toggleFormVisibility = () => {
     setIsFormVisible(!isFormVisible);
   };
 
-  
   const deleteProducts = (id) => {
     dispatch(deleteProductThunk(id));
   };
 
-  // Axtarış və Sortlama
-const filteredProducts = products
-  ?.filter((item) =>
-    item?.title?.toLowerCase().includes(searchTerm.toLowerCase())
-  )
-  ?.sort((a, b) => {
-    if (sortBy === 'price') {
-      return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
-    } else if (sortBy === 'title') {
-      return sortOrder === 'asc'
-        ? a.title.localeCompare(b.title)
-        : b.title.localeCompare(a.title);
-    }
-    return 0;
-  });
+  const deleteCharms = (id) => {
+    dispatch(deleteCharmsThunk(id));
+  };
 
+  const filteredProducts = products
+    ?.filter((item) => item?.title?.toLowerCase().includes(searchTerm.toLowerCase()))
+    ?.sort((a, b) => {
+      if (sortBy === 'price') {
+        return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
+      } else if (sortBy === 'title') {
+        return sortOrder === 'asc'
+          ? a.title.localeCompare(b.title)
+          : b.title.localeCompare(a.title);
+      }
+      return 0;
+    });
+
+  const filteredCharms = charms
+    ?.filter((item) => item?.title?.toLowerCase().includes(searchTerm.toLowerCase()))
+    ?.sort((a, b) => {
+      if (sortBy === 'price') {
+        return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
+      } else if (sortBy === 'title') {
+        return sortOrder === 'asc'
+          ? a.title.localeCompare(b.title)
+          : b.title.localeCompare(a.title);
+      }
+      return 0;
+    });
 
   const getSortButtonLabel = () => {
     if (sortBy === 'price') {
@@ -53,26 +66,28 @@ const filteredProducts = products
     return 'Sırala';
   };
 
-  const formik = useFormik({
-    initialValues: {
-      image: '',
-      title: '',
-      price: '',
-      category: '',
-    },
-    onSubmit: async (values, { resetForm }) => {
-      try {
-        await dispatch(addFormikThunk(values));
-        resetForm(); // Form sahələrini sıfırlayın
-        setIsFormVisible(false); // Məhsul əlavə edildikdən sonra formu bağlayın
-      } catch (error) {
-        console.error('Məhsul əlavə edilərkən xəta baş verdi:', error);
-      }
-    },
-  });
+const formik = useFormik({
+  initialValues: {
+    image: '',
+    title: '',
+    price: '',
+    category: '',
+  },
+  onSubmit: async (values, { resetForm }) => {
+    try {
+      await dispatch(addFormikThunk(values));
+      resetForm();
+      setIsFormVisible(false);
+    } catch (error) {
+      console.error('Məhsul əlavə edilərkən xəta baş verdi:', error);
+    }
+  },
+});
+
 
   useEffect(() => {
     dispatch(getProductsThunk());
+    dispatch(getCharmsThunk());
   }, [dispatch]);
 
   if (loading) return <p className={styles.loading}>Yüklənir....</p>;
@@ -87,70 +102,77 @@ const filteredProducts = products
         {isFormVisible && (
           <form onSubmit={formik.handleSubmit} className={styles.form}>
             <label htmlFor="image">Image</label>
-            <input
-              id="image"
-              name="image"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.image}
-              placeholder="Enter image URL"
-            />
+            <input id="image" name="image" type="text" onChange={formik.handleChange} value={formik.values.image} placeholder="Enter image URL" />
             <label htmlFor="title">Title</label>
-            <input
-              id="title"
-              name="title"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.title}
-              placeholder="Enter the product title"
-            />
+            <input id="title" name="title" type="text" onChange={formik.handleChange} value={formik.values.title} placeholder="Enter the product title" />
             <label htmlFor="price">Price</label>
-            <input
-              id="price"
-              name="price"
-              type="number"
-              onChange={formik.handleChange}
-              value={formik.values.price}
-              placeholder="Enter the price"
-            />
+            <input id="price" name="price" type="number" onChange={formik.handleChange} value={formik.values.price} placeholder="Enter the price" />
             <label htmlFor="category">Category</label>
-            <input
-              id="category"
-              name="category"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.category}
-              placeholder="Enter the category"
-            />
+<select
+  id="category"
+  name="category"
+  onChange={formik.handleChange}
+  value={formik.values.category}
+  className={styles.select}
+>
+  <option value="">Choose category</option>
+  <option value="products">Products</option>
+  <option value="charms">Charms</option>
+</select>
+
             <button type="submit" className={styles.submitButton}>ADD</button>
           </form>
         )}
       </div>
+
       <div className={styles.controlPanel}>
         <h1>Admin Panel</h1>
-        <input
-          className={styles.searchInput}
-          type="text"
-          placeholder="Məhsul axtar..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <select
-          className={styles.sortSelect}
-          onChange={(e) => setSortBy(e.target.value)}
-          value={sortBy}
-        >
+        <input className={styles.searchInput} type="text" placeholder="Məhsul axtar..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+        <select className={styles.sortSelect} onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
           <option value="price">Qiymətə görə</option>
           <option value="title">Başlığa görə</option>
         </select>
-        <button
-          className={styles.sortButton}
-          onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-        >
+        <button className={styles.sortButton} onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}>
           {getSortButtonLabel()}
         </button>
       </div>
 
+      <h2>Charm-lar</h2>
+      <table className={styles.productTable}>
+        <thead>
+          <tr>
+            <th>Şəkil</th>
+            <th>Başlıq</th>
+            <th>Qiymət</th>
+            <th>Funksiya</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredCharms &&
+            filteredCharms.map((item) => (
+              <tr key={item._id}>
+                <td>
+                  <div className={styles.box}>
+                    <img className={styles.productImage} src={item.image} alt={item.title} />
+                  </div>
+                </td>
+                <td>
+                  <div className={styles.box}>{item.title}</div>
+                </td>
+                <td>
+                  <div className={styles.box}>{item.price}$</div>
+                </td>
+                <td>
+                  <div className={styles.box}>
+                    <button className={styles.deleteButton} onClick={() => deleteCharms(item._id)}>Sil</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+
+      <h2>Products</h2>
       <table className={styles.productTable}>
         <thead>
           <tr>
@@ -177,12 +199,7 @@ const filteredProducts = products
                 </td>
                 <td>
                   <div className={styles.box}>
-                    <button
-                      className={styles.deleteButton}
-                      onClick={() => deleteProducts(item._id)}
-                    >
-                      Sil
-                    </button>
+                    <button className={styles.deleteButton} onClick={() => deleteProducts(item._id)}>Sil</button>
                   </div>
                 </td>
               </tr>
@@ -193,9 +210,4 @@ const filteredProducts = products
   );
 };
 
-
 export default AdminSec;
-
- 
-
-

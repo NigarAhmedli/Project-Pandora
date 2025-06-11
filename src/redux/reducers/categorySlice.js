@@ -4,13 +4,10 @@ import axios from "axios"
 
 
 export const getCategoryThunk = createAsyncThunk('api/category', async () => {
-    const response = await axios.get('')
+    const response = await axios.get('http://localhost:5000/category')
 
     return response.data
 })
-
-
-
 
 export const categorySlice = createSlice({
     name: 'category',

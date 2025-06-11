@@ -29,27 +29,32 @@
   }
 }
 
-.onclick {
+.paginationDots {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  margin-top: 1rem;
+  gap: 10px;
 }
 
-.buttons {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  background-color: white;
-  color: #333;
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: #bbb;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
+  display: inline-block;
 
   &:hover {
-    background-color: #eaeaea;
+    background-color: #888;
   }
 }
+
+.activeDot {
+  background-color:black; 
+  box-shadow: 0 0 6px gray;
+}
+
 
 .active {
   background-color: #333;

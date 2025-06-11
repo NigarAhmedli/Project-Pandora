@@ -1,7 +1,7 @@
 .section {
   width: 100%;
   padding: 60px 20px;
-  background-color:white;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,8 +11,62 @@
 
     h1 {
       font-size: 40px;
-      color:black;
+      color: black;
       font-weight: bold;
+    }
+  }
+
+  .controlPanel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+
+    .searchInput {
+      padding: 10px 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      outline: none;
+      transition: all 0.3s;
+      width: 220px;
+
+      &:focus {
+        border-color: black;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    .sortSelect {
+      padding: 10px 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      outline: none;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: #ececec;
+      }
+    }
+
+    .sortButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: black;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #333;
+      }
     }
   }
 
@@ -41,31 +95,29 @@
     }
   }
 
-.paginationDots {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 40px;
+  .paginationDots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
 
-  .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: #ccc;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s;
 
-    &:hover {
-      background-color: #999;
+      &:hover {
+        background-color: #999;
+      }
+    }
+
+    .active {
+      background-color: black;
     }
   }
-
-  .active {
-    background-color: black;
-  }
-}
-
-
 }
 
 @media (max-width: 768px) {
@@ -76,6 +128,17 @@
 
     .products {
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .controlPanel {
+      flex-direction: column;
+
+      .searchInput,
+      .sortSelect,
+      .sortButton {
+        width: 100%;
+        max-width: 300px;
+      }
     }
   }
 }

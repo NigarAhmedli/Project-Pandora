@@ -72,21 +72,24 @@ DeleteWishlist={()=>handledeleteWishlist(item._id)}
 )}
 </div>
 
-{wishlist.length>itemsPage && (
-  <div className={style.onclick} >
-    {arrays.map(item=>(
-   <button
-  key={item}
-  className={`${style.buttons} ${page === item ? style.active : ""}`}
-  onClick={() => setPage(item)}
->
-  {item}
-</button>
-
+{wishlist.length > itemsPage && (
+  <div className={style.paginationDots}>
+    {arrays.map((pageNumber) => (
+      <span
+        key={pageNumber}
+        className={`${style.dot} ${page === pageNumber ? style.activeDot : ''}`}
+        onClick={() => setPage(pageNumber)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') setPage(pageNumber);
+        }}
+        aria-label={`Go to page ${pageNumber}`}
+      />
     ))}
-
   </div>
 )}
+
 
     </div>
   )

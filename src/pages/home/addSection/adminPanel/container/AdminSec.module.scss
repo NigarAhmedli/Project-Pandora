@@ -6,9 +6,10 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color:white;
+  background-color: white;
   color: #333;
 }
+
 
 .admin {
   max-width: 1200px;
@@ -21,6 +22,8 @@ body {
   flex-direction: column;
   gap: 40px;
 }
+
+
 
 .addSection {
   display: flex;
@@ -37,17 +40,17 @@ body {
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .addButton:hover {
   background-color: #333;
 }
 
+
 .form {
   display: grid;
   gap: 15px;
-  grid-template-columns: 1fr;
   background-color: #f6f6f6;
   padding: 25px;
   border-radius: 10px;
@@ -58,7 +61,8 @@ body {
   font-size: 14px;
 }
 
-.form input {
+.form input,
+.select {
   padding: 10px;
   border: 1px solid #aaa;
   border-radius: 6px;
@@ -66,7 +70,8 @@ body {
   transition: border 0.3s ease;
 }
 
-.form input:focus {
+.form input:focus,
+.select:focus {
   border-color: #000;
 }
 
@@ -77,12 +82,13 @@ body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .submitButton:hover {
   background-color: #444;
 }
+
 
 .controlPanel {
   display: grid;
@@ -116,14 +122,14 @@ body {
   background-color: #000;
 }
 
+
 .productTable {
   width: 100%;
-  border-spacing: 0;
   border-collapse: collapse;
-  overflow: hidden;
   background-color: #fafafa;
   border-radius: 10px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 .productTable th,
@@ -142,6 +148,7 @@ body {
 .productTable tr:last-child td {
   border-bottom: none;
 }
+
 
 .productImage {
   width: 140px;
@@ -164,6 +171,7 @@ body {
   background-color: gray;
 }
 
+
 .loading,
 .error {
   font-size: 16px;
@@ -172,6 +180,7 @@ body {
   text-align: center;
   padding: 20px;
 }
+
 
 @media (max-width: 768px) {
   .productImage {

@@ -3,6 +3,7 @@ import  productSlice  from "./reducers/productSlice";
 import  basketSlice  from "./reducers/basketSlice";
 import  wishlistSlice  from "./reducers/wishlistSlice";
 import categorySlice  from "./reducers/categorySlice";
+import charmsSlice  from "./reducers/charmsSlice";
 
 export const store=configureStore({
 
@@ -11,6 +12,7 @@ export const store=configureStore({
   basket:basketSlice,
   wishlist:wishlistSlice,
   category:categorySlice, 
+  charms:charmsSlice,
     }
   
 
