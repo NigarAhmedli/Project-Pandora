@@ -4,11 +4,14 @@ import { addFormikThunk, deleteProductThunk, getProductsThunk } from '../../../.
 import styles from './AdminSec.module.scss';
 import { useFormik } from 'formik';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { deleteCharmsThunk, getCharmsThunk } from '../../../../../redux/reducers/charmsSlice';
+import { deleteCharmsThunk, getCharmsThunk, postCharmsThunk } from '../../../../../redux/reducers/charmsSlice';
+import { getBraceletThunk, postBraceletThunk, deleteBraceletThunk } from '../../../../../redux/reducers/braceletSlice';
+
 
 const AdminSec = () => {
   const dispatch = useDispatch();
 
+  const bracelet = useSelector((state) => state.bracelet.bracelet);
   const charms = useSelector((state) => state.charms.charms);
   const products = useSelector((state) => state.products.products);
   const loading = useSelector((state) => state.products.loading);
@@ -44,6 +47,21 @@ const AdminSec = () => {
       return 0;
     });
 
+const filteredBracelets = bracelet
+  ?.filter((item) => item?.title?.toLowerCase().includes(searchTerm.toLowerCase()))
+  ?.sort((a, b) => {
+    if (sortBy === 'price') {
+      return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
+    } else if (sortBy === 'title') {
+      return sortOrder === 'asc'
+        ? a.title.localeCompare(b.title)
+        : b.title.localeCompare(a.title);
+    }
+    return 0;
+  });
+
+
+
   const filteredCharms = charms
     ?.filter((item) => item?.title?.toLowerCase().includes(searchTerm.toLowerCase()))
     ?.sort((a, b) => {
@@ -73,21 +91,29 @@ const formik = useFormik({
     price: '',
     category: '',
   },
-  onSubmit: async (values, { resetForm }) => {
-    try {
+onSubmit: async (values, { resetForm }) => {
+  try {
+    if (values.category === 'products') {
       await dispatch(addFormikThunk(values));
-      resetForm();
-      setIsFormVisible(false);
-    } catch (error) {
-      console.error('Məhsul əlavə edilərkən xəta baş verdi:', error);
+    } else if (values.category === 'charms') {
+      await dispatch(postCharmsThunk(values));
+    } else if (values.category === 'bracelet') {
+      await dispatch(postBraceletThunk(values)); // <-- bracelet üçün ayrıca
     }
-  },
+    resetForm();
+    setIsFormVisible(false);
+  } catch (error) {
+    console.error('Məhsul əlavə edilərkən xəta baş verdi:', error);
+  }
+},
+
 });
 
 
   useEffect(() => {
     dispatch(getProductsThunk());
     dispatch(getCharmsThunk());
+    dispatch(getBraceletThunk())
   }, [dispatch]);
 
   if (loading) return <p className={styles.loading}>Yüklənir....</p>;
@@ -118,7 +144,10 @@ const formik = useFormik({
   <option value="">Choose category</option>
   <option value="products">Products</option>
   <option value="charms">Charms</option>
+  <option value="bracelet">Bracelet</option> 
 </select>
+
+
 
             <button type="submit" className={styles.submitButton}>ADD</button>
           </form>
@@ -137,7 +166,37 @@ const formik = useFormik({
         </button>
       </div>
 
-      <h2>Charm-lar</h2>
+
+
+<h2>Bracelets</h2>
+<table className={styles.productTable}>
+  <thead>
+    <tr>
+      <th>Şəkil</th>
+      <th>Başlıq</th>
+      <th>Qiymət</th>
+      <th>Funksiya</th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredBracelets?.map((item) => (
+      <tr key={item._id}>
+        <td>
+          <img className={styles.productImage} src={item.image} alt={item.title} />
+        </td>
+        <td>{item.title}</td>
+        <td>{item.price}$</td>
+        <td>
+          <button className={styles.deleteButton} onClick={() => dispatch(deleteBraceletThunk(item._id))}>Sil</button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+
+
+      <h2>Charms</h2>
       <table className={styles.productTable}>
         <thead>
           <tr>

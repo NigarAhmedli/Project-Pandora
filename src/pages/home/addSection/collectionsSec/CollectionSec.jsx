@@ -4,6 +4,7 @@ import FirstS from './container/firstS/FirstS'
 import CardSec from '../../components/cardSec/CardSec'
 import Category from './container/collection/Category'
 
+
 const CollectionSec = () => {
   return (
     <Layout>

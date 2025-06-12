@@ -1,121 +1,162 @@
 .section {
-  padding: 2rem;
-  background-color: #f8f8f8;
-  min-height: 100vh;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
 
-  h2 {
+  h1 {
     font-size: 2rem;
-    color: #333;
+    font-weight: bold;
+    border-bottom: 2px solid #444;
+    display: inline-block;
+    padding-bottom: 5px;
   }
 }
 
 .controlPanel {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
   flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
 
-  .searchInput {
-    padding: 0.5rem 1rem;
+  .searchInput,
+  .sortSelect,
+  .sortButton {
+    padding: 8px 12px;
+    border-radius: 6px;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    width: 200px;
-  }
-
-  .sortSelect {
-    padding: 0.5rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    font-size: 14px;
   }
 
   .sortButton {
-    padding: 0.5rem 1rem;
-    background-color: #222;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    background-color: #333;
+    color: white;
+    border: none;
+  }
 
-    &:hover {
+  .sortButton:hover {
+    background-color: #555;
+  }
+}
+
+.collection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+
+  .collectionWrapper {
+    width: 250px;
+    transition: transform 0.3s ease;
+
+    .collectionLink {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.03);
+        z-index: 2;
+      }
+
+      .imgBox {
+        width: 100%;
+        height: 220px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: none; // hover effekti yoxdur
+        }
+      }
+
+      .text {
+        padding: 10px;
+        text-align: center;
+
+        h3 {
+          font-size: 1.1rem;
+          color: #333;
+        }
+
+        p {
+          color: #777;
+        }
+      }
+    }
+  }
+}
+
+.paginationDots {
+  margin-top: 30px;
+  text-align: center;
+
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 6px;
+    background-color: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &.active {
       background-color: #444;
     }
   }
 }
 
-.products {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  .productGroup {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    width: 100%;
-  }
-}
-
-.btns {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-
-  .navigation {
-    display: flex;
-    gap: 1rem;
-
-    button {
-      padding: 0.5rem 1rem;
-      font-size: 1.2rem;
-      background-color: #222;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: #444;
-      }
-
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-    }
-  }
-}
-
-
+/* -------------- RESPONSIVE -------------- */
 
 @media (max-width: 1024px) {
-  .products .productGroup {
-    grid-template-columns: repeat(2, 1fr);
+  .collectionWrapper {
+    width: 45%;
+  }
+
+  .header h1 {
+    font-size: 1.8rem;
   }
 }
 
 @media (max-width: 700px) {
-  .products .productGroup {
-    grid-template-columns: 1fr;
+  .collectionWrapper {
+    width: 100%;
   }
 
   .controlPanel {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
 
     .searchInput,
     .sortSelect,
     .sortButton {
-      width: 100%;
+      width: 90%;
     }
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
   }
 }

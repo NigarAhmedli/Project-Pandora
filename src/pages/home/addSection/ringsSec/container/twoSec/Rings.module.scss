@@ -1,0 +1,136 @@
+.section {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.header {
+  text-align: center;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 100%;
+      background-color: #000;
+    }
+  }
+}
+
+.controlPanel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+
+  .searchInput {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 220px;
+  }
+
+  .sortSelect {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  .sortButton {
+    padding: 10px 15px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #333;
+    }
+  }
+}
+
+.rings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.ringsWrapper {
+  width: 100%;
+  max-width: 250px;
+  text-decoration: none;
+}
+
+.ringsLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.paginationDots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &.active {
+      background-color: #000;
+    }
+  }
+}
+
+/* Responsivlik */
+@media screen and (max-width: 768px) {
+  .ringsWrapper {
+    max-width: 45%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .ringsWrapper {
+    max-width: 100%;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .controlPanel {
+    flex-direction: column;
+    align-items: stretch;
+
+    .searchInput,
+    .sortSelect,
+    .sortButton {
+      width: 100%;
+    }
+  }
+}
