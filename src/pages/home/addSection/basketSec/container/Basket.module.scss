@@ -1,0 +1,138 @@
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+
+  h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .basketItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .info {
+      flex: 1;
+      padding: 0 20px;
+
+      h4 {
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+
+      p {
+        margin-bottom: 5px;
+        font-size: 15px;
+      }
+
+      .quantityControl {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        button {
+          padding: 5px 10px;
+          font-size: 16px;
+          cursor: pointer;
+          background-color: #eee;
+          border: none;
+          border-radius: 5px;
+
+          &:hover {
+            background-color: #ddd;
+          }
+        }
+
+        span {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      button {
+        padding: 6px 12px;
+        background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+
+        &:hover {
+          background-color: #d32f2f;
+        }
+      }
+    }
+  }
+
+  .summary {
+    margin-top: 30px;
+    text-align: center;
+
+    h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+
+      &:hover {
+        background-color: #388e3c;
+      }
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+
+    button {
+      padding: 6px 12px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: #90caf9;
+        cursor: not-allowed;
+      }
+    }
+
+    span {
+      font-size: 16px;
+    }
+  }
+}
