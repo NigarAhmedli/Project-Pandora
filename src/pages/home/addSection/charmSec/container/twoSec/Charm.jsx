@@ -1,11 +1,12 @@
+// Charm.jsx
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styles from "./Charm.module.scss";
-import { getCharmsThunk } from '../../../../../../redux/reducers/charmsSlice';
 import CharmsCard from '../../../../../../components/card/charmsCard/CharmsCard';
+import { getCharmsThunk } from '../../../../../../redux/reducers/charmsSlice';
+import { getWishlistThunk } from '../../../../../../redux/reducers/wishlistSlice';
 import { postBasketThunk } from '../../../../../../redux/reducers/basketSlice';
-import { postWishlistThunk } from '../../../../../../redux/reducers/wishlistSlice';
 
 const Charm = () => {
     const dispatch = useDispatch();
@@ -21,36 +22,29 @@ const Charm = () => {
 
     useEffect(() => {
         dispatch(getCharmsThunk());
+        dispatch(getWishlistThunk());
     }, [dispatch]);
 
     const AddBasket = (item) => {
         dispatch(postBasketThunk(item));
     };
 
-    const AddWishlist = (item) => {
-        const existingCharms = wishlist.find(charms => charms._id === item._id);
-        if (!existingCharms) {
-            dispatch(postWishlistThunk(item));
-        }
-    };
-
     // Filter + Sort
-const filteredCharms = charms
-  ?.filter(item =>
-    item?.title &&
-    item.title.toLowerCase().includes(searchTerm?.toLowerCase() || "")
-  )
-  .sort((a, b) => {
-    if (sortBy === "price") {
-      return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
-    } else if (sortBy === "title") {
-      return sortOrder === "asc"
-        ? a.title.localeCompare(b.title)
-        : b.title.localeCompare(a.title);
-    }
-    return 0;
-  });
-
+    const filteredCharms = charms
+        ?.filter(item =>
+            item?.title &&
+            item.title.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+        )
+        .sort((a, b) => {
+            if (sortBy === "price") {
+                return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+            } else if (sortBy === "title") {
+                return sortOrder === "asc"
+                    ? a.title.localeCompare(b.title)
+                    : b.title.localeCompare(a.title);
+            }
+            return 0;
+        });
 
     // Pagination
     const [page, setPage] = useState(1);
@@ -58,7 +52,6 @@ const filteredCharms = charms
     const lastCharmsIndex = page * charmsPage;
     const firstCharmsIndex = lastCharmsIndex - charmsPage;
     const currentCharms = filteredCharms.slice(firstCharmsIndex, lastCharmsIndex);
-
     const totalPages = Math.ceil(filteredCharms.length / charmsPage);
     const dummy = Array.from({ length: totalPages }, (_, i) => i + 1);
 
@@ -113,9 +106,8 @@ const filteredCharms = charms
                     <div key={item._id} className={styles.charmsWrapper}>
                         <Link to={`/charms/${item._id}`} className={styles.charmsLink}>
                             <CharmsCard 
-                             item={item}
+                                item={item}
                                 AddBasket={AddBasket}
-                                AddWishlist={AddWishlist}
                             />
                         </Link>
                     </div>

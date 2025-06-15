@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styles from "./Category.module.scss";
 import { postBasketThunk } from '../../../../../../redux/reducers/basketSlice';
-import { postWishlistThunk } from '../../../../../../redux/reducers/wishlistSlice';
 import { getCollectionThunk } from '../../../../../../redux/reducers/collectionSlice';
 import CollectionCard from '../../../../../../components/card/collectionCard/CollectionCard';
+import { deleteWishlistThunk, postWishlistThunk } from '../../../../../../redux/reducers/wishlistSlice';
+
 
 const Category = () => {
     const dispatch = useDispatch();
@@ -27,32 +28,31 @@ const Category = () => {
         dispatch(postBasketThunk(item));
     };
 
-    const AddWishlist = (item) => {
-        const existingCollection = wishlist.find(collection => collection._id === item._id);
-        if (!existingCollection) {
+    const toggleWishlist = (item) => {
+        const existing = wishlist.find(w => w._id === item._id);
+        if (existing) {
+            dispatch(deleteWishlistThunk(item._id));
+        } else {
             dispatch(postWishlistThunk(item));
         }
     };
 
-    // Filter + Sort
-const filteredCollection = collection
-  ?.filter(item =>
-    item?.title &&
-    item.title.toLowerCase().includes(searchTerm?.toLowerCase() || "")
-  )
-  .sort((a, b) => {
-    if (sortBy === "price") {
-      return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
-    } else if (sortBy === "title") {
-      return sortOrder === "asc"
-        ? a.title.localeCompare(b.title)
-        : b.title.localeCompare(a.title);
-    }
-    return 0;
-  });
+    const filteredCollection = collection
+        ?.filter(item =>
+            item?.title &&
+            item.title.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+        )
+        .sort((a, b) => {
+            if (sortBy === "price") {
+                return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+            } else if (sortBy === "title") {
+                return sortOrder === "asc"
+                    ? a.title.localeCompare(b.title)
+                    : b.title.localeCompare(a.title);
+            }
+            return 0;
+        });
 
-
-    // Pagination
     const [page, setPage] = useState(1);
     const collectionPage = 4;
     const lastCollectionIndex = page * collectionPage;
@@ -80,7 +80,6 @@ const filteredCollection = collection
                 <h1>COLLECTION</h1>
             </div>
 
-            {/* Control Panel */}
             <div className={styles.controlPanel}>
                 <input
                     className={styles.searchInput}
@@ -107,22 +106,21 @@ const filteredCollection = collection
                 </button>
             </div>
 
-            {/* Product List */}
             <div className={styles.collection}>
                 {currentCollection.map(item => (
                     <div key={item._id} className={styles.collectionWrapper}>
                         <Link to={`/collection/${item._id}`} className={styles.collectionLink}>
                             <CollectionCard
-                             item={item}
+                                item={item}
                                 AddBasket={AddBasket}
-                                AddWishlist={AddWishlist}
+                                AddWishlist={toggleWishlist}
+                                isWished={wishlist.some(w => w._id === item._id)}
                             />
                         </Link>
                     </div>
                 ))}
             </div>
 
-            {/* Pagination */}
             <div className={styles.paginationDots}>
                 {dummy.map((item) => (
                     <span

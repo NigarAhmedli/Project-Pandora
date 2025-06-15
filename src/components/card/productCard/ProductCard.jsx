@@ -1,56 +1,65 @@
-import React, { useState } from 'react'
-import styles from "./ProductCard.module.scss"
+import React, { useEffect, useState } from 'react';
+import styles from "./ProductCard.module.scss";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import { FaRegHeart } from "react-icons/fa";
-const ProductCard = ({ item, AddBasket, AddWishlist }) => {
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux';
+import { postWishlistThunk, deleteWishlistThunk } from '../../../redux/reducers/wishlistSlice';
+import { Link } from 'react-router-dom';
 
-  const [addedToBasket, setAddedToBasket] = useState(false);
-  const [addedToWishlist, setAddedToWishlist] = useState(false);
+const ProductCard = ({ item, AddBasket }) => {
+  const dispatch = useDispatch();
+  const wishlist = useSelector(state => state.wishlist.wishlist);
 
+  const isInWishlist = wishlist.some(product => product._id === item._id);
+  const [liked, setLiked] = useState(isInWishlist);
+
+  useEffect(() => {
+    setLiked(isInWishlist);
+  }, [wishlist, isInWishlist]);
+
+  const handleWishlistClick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (liked) {
+      dispatch(deleteWishlistThunk(item._id));
+    } else {
+      dispatch(postWishlistThunk(item));
+    }
+
+    setLiked(!liked);
+  };
 
   const handleAddToBasket = (event) => {
-    event.preventDefault();  // Link klikini tamamilə bloklayır
-    event.stopPropagation(); // Parent klikləri də bloklayır
+    event.preventDefault();
+    event.stopPropagation();
     AddBasket(item);
-    setAddedToBasket(true);
-    setTimeout(() => setAddedToBasket(false), 500);
   };
-  
-  const handleAddToWishlist = (event) => {
-    event.preventDefault();  // Link klikini tamamilə bloklayır
-    event.stopPropagation(); // Parent klikləri də bloklayır
-    AddWishlist(item);
-    setAddedToWishlist(true);
-    setTimeout(() => setAddedToWishlist(false), 500);
-  };
-  
-
 
   return (
     <div className={styles.container}>
-      <div className={styles.card}>
-        <div className={styles.imgBox}>
-          <img src={item.image} alt="products" />
-          <div className={styles.buttons}>
-            <button onClick={(event) => handleAddToWishlist(event)}>
-              <FaRegHeart />
-            </button>
+      <Link to={`/product/${item._id}`} className={styles.linkWrapper}>
 
-            <button onClick={(event) => handleAddToBasket(event)}>
-              <HiOutlineShoppingBag />
-            </button>
-
+        <div className={styles.card}>
+          <div className={styles.imgBox}>
+            <img src={item.image} alt="products" />
+            <div className={styles.buttons}>
+              <button onClick={handleWishlistClick}>
+                {liked ? <FaHeart style={{ color: 'red' }} /> : <FaRegHeart />}
+              </button>
+              <button onClick={handleAddToBasket}>
+                <HiOutlineShoppingBag />
+              </button>
+            </div>
+          </div>
+          <div className={styles.text}>
+            <h3>{item.title}</h3>
+            <p>{item.price}$</p>
           </div>
         </div>
-        <div className={styles.text}>
-          <h3>{item.title}</h3>
-          <p>{item.price}$</p>
-
-        </div>
-
-      </div>
+      </Link>
     </div>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;

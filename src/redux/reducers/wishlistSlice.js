@@ -12,7 +12,7 @@ export const updateWishlistThunk = createAsyncThunk('update/wishlist', async (pr
     return response.data
 })
 
-export const deleteWishlistThunk = createAsyncThunk('products/delete', async (id) => {
+export const deleteWishlistThunk = createAsyncThunk('wishlist/delete', async (id) => {
     const response = await axios.delete(`http://localhost:5000/wishlist/${id}`)
     return id
 })

@@ -1,3 +1,4 @@
+// ProductSec.jsx
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -5,11 +6,10 @@ import ProductCard from '../../../../components/card/productCard/ProductCard';
 import { getProductsThunk } from '../../../../redux/reducers/productSlice';
 import styles from "./ProductSec.module.scss";
 import { postBasketThunk } from '../../../../redux/reducers/basketSlice';
-import { postWishlistThunk } from '../../../../redux/reducers/wishlistSlice';
+import { getWishlistThunk } from '../../../../redux/reducers/wishlistSlice';
 
 const ProductSec = () => {
     const dispatch = useDispatch();
-
     const products = useSelector(state => state.products.products);
     const loading = useSelector(state => state.products.loading);
     const error = useSelector(state => state.products.error);
@@ -21,36 +21,29 @@ const ProductSec = () => {
 
     useEffect(() => {
         dispatch(getProductsThunk());
+        dispatch(getWishlistThunk()); 
     }, [dispatch]);
 
     const AddBasket = (item) => {
         dispatch(postBasketThunk(item));
     };
 
-    const AddWishlist = (item) => {
-        const existingProduct = wishlist.find(product => product._id === item._id);
-        if (!existingProduct) {
-            dispatch(postWishlistThunk(item));
-        }
-    };
-
     // Filter + Sort
-const filteredProducts = products
-  ?.filter(item =>
-    item?.title &&
-    item.title.toLowerCase().includes(searchTerm?.toLowerCase() || "")
-  )
-  .sort((a, b) => {
-    if (sortBy === "price") {
-      return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
-    } else if (sortBy === "title") {
-      return sortOrder === "asc"
-        ? a.title.localeCompare(b.title)
-        : b.title.localeCompare(a.title);
-    }
-    return 0;
-  });
-
+    const filteredProducts = products
+        ?.filter(item =>
+            item?.title &&
+            item.title.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+        )
+        .sort((a, b) => {
+            if (sortBy === "price") {
+                return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+            } else if (sortBy === "title") {
+                return sortOrder === "asc"
+                    ? a.title.localeCompare(b.title)
+                    : b.title.localeCompare(a.title);
+            }
+            return 0;
+        });
 
     // Pagination
     const [page, setPage] = useState(1);
@@ -58,7 +51,6 @@ const filteredProducts = products
     const lastProductIndex = page * productsPage;
     const firstProductIndex = lastProductIndex - productsPage;
     const currentProducts = filteredProducts.slice(firstProductIndex, lastProductIndex);
-
     const totalPages = Math.ceil(filteredProducts.length / productsPage);
     const dummy = Array.from({ length: totalPages }, (_, i) => i + 1);
 
@@ -80,7 +72,6 @@ const filteredProducts = products
                 <h1>BEST SELLER</h1>
             </div>
 
-            {/* Control Panel */}
             <div className={styles.controlPanel}>
                 <input
                     className={styles.searchInput}
@@ -107,22 +98,17 @@ const filteredProducts = products
                 </button>
             </div>
 
-            {/* Product List */}
             <div className={styles.products}>
                 {currentProducts.map(item => (
                     <div key={item._id} className={styles.productWrapper}>
-                        <Link to={`/product/${item._id}`} className={styles.productLink}>
-                            <ProductCard
-                                item={item}
-                                AddBasket={AddBasket}
-                                AddWishlist={AddWishlist}
-                            />
-                        </Link>
+  <ProductCard
+    item={item}
+    AddBasket={AddBasket}
+  />
                     </div>
                 ))}
             </div>
 
-            {/* Pagination */}
             <div className={styles.paginationDots}>
                 {dummy.map((item) => (
                     <span

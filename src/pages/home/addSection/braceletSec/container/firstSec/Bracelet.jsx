@@ -1,11 +1,12 @@
+// Bracelet.jsx
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styles from "./Bracelet.module.scss";
 import { postBasketThunk } from '../../../../../../redux/reducers/basketSlice';
-import { postWishlistThunk } from '../../../../../../redux/reducers/wishlistSlice';
-import { getBraceletThunk } from '../../../../../../redux/reducers/braceletSlice';
 import BraceletCard from '../../../../../../components/card/braceletCard/BraceletCard';
+import { getBraceletThunk } from '../../../../../../redux/reducers/braceletSlice';
+import { getWishlistThunk } from '../../../../../../redux/reducers/wishlistSlice';
 
 const Bracelet = () => {
     const dispatch = useDispatch();
@@ -21,44 +22,34 @@ const Bracelet = () => {
 
     useEffect(() => {
         dispatch(getBraceletThunk());
+        dispatch(getWishlistThunk());
     }, [dispatch]);
 
     const AddBasket = (item) => {
         dispatch(postBasketThunk(item));
     };
 
-    const AddWishlist = (item) => {
-        const existingBracelet = wishlist.find(bracelet => bracelet._id === item._id);
-        if (!existingBracelet) {
-            dispatch(postWishlistThunk(item));
-        }
-    };
+    const filteredBracelet = bracelet
+        ?.filter(item =>
+            item?.title &&
+            item.title.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+        )
+        .sort((a, b) => {
+            if (sortBy === "price") {
+                return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+            } else if (sortBy === "title") {
+                return sortOrder === "asc"
+                    ? a.title.localeCompare(b.title)
+                    : b.title.localeCompare(a.title);
+            }
+            return 0;
+        });
 
-    // Filter + Sort
-const filteredBracelet = bracelet
-  ?.filter(item =>
-    item?.title &&
-    item.title.toLowerCase().includes(searchTerm?.toLowerCase() || "")
-  )
-  .sort((a, b) => {
-    if (sortBy === "price") {
-      return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
-    } else if (sortBy === "title") {
-      return sortOrder === "asc"
-        ? a.title.localeCompare(b.title)
-        : b.title.localeCompare(a.title);
-    }
-    return 0;
-  });
-
-
-    // Pagination
     const [page, setPage] = useState(1);
     const braceletPage = 4;
     const lastBraceletIndex = page * braceletPage;
     const firstBraceletIndex = lastBraceletIndex - braceletPage;
     const currentBracelet = filteredBracelet.slice(firstBraceletIndex, lastBraceletIndex);
-
     const totalPages = Math.ceil(filteredBracelet.length / braceletPage);
     const dummy = Array.from({ length: totalPages }, (_, i) => i + 1);
 
@@ -80,7 +71,6 @@ const filteredBracelet = bracelet
                 <h1>BRACELETS</h1>
             </div>
 
-            {/* Control Panel */}
             <div className={styles.controlPanel}>
                 <input
                     className={styles.searchInput}
@@ -107,22 +97,19 @@ const filteredBracelet = bracelet
                 </button>
             </div>
 
-            {/* Product List */}
             <div className={styles.bracelet}>
                 {currentBracelet.map(item => (
                     <div key={item._id} className={styles.braceletWrapper}>
                         <Link to={`/bracelet/${item._id}`} className={styles.braceletLink}>
                             <BraceletCard
-                             item={item}
+                                item={item}
                                 AddBasket={AddBasket}
-                                AddWishlist={AddWishlist}
                             />
                         </Link>
                     </div>
                 ))}
             </div>
 
-            {/* Pagination */}
             <div className={styles.paginationDots}>
                 {dummy.map((item) => (
                     <span

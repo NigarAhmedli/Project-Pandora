@@ -28,6 +28,7 @@ const Router = () => {
     <div>
       <BrowserRouter>
         <Routes>
+          
           <Route path="/" element={<Home />} />
           <Route path="/cares" element={<PandoraCares />} />
           <Route path="/about" element={<AboutPandora />} />

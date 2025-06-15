@@ -1,30 +1,20 @@
-import React, { useState } from 'react'
-import styles from "./CollectionCard.module.scss"
+import React from 'react';
+import styles from "./CollectionCard.module.scss";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import { FaRegHeart } from "react-icons/fa";
-const CollectionCard = ({ item, AddBasket, AddWishlist }) => {
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 
-  const [addedToBasket, setAddedToBasket] = useState(false);
-  const [addedToWishlist, setAddedToWishlist] = useState(false);
-
-
+const CollectionCard = ({ item, AddBasket, AddWishlist, isWished }) => {
   const handleAddToBasket = (event) => {
-    event.preventDefault();  // Link klikini tamamilə bloklayır
-    event.stopPropagation(); // Parent klikləri də bloklayır
+    event.preventDefault();
+    event.stopPropagation();
     AddBasket(item);
-    setAddedToBasket(true);
-    setTimeout(() => setAddedToBasket(false), 500);
   };
-  
-  const handleAddToWishlist = (event) => {
-    event.preventDefault();  // Link klikini tamamilə bloklayır
-    event.stopPropagation(); // Parent klikləri də bloklayır
-    AddWishlist(item);
-    setAddedToWishlist(true);
-    setTimeout(() => setAddedToWishlist(false), 500);
-  };
-  
 
+  const handleToggleWishlist = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    AddWishlist(item); // Bu artıq həm əlavə edir, həm də silir (toggle işləyir)
+  };
 
   return (
     <div className={styles.container}>
@@ -32,25 +22,21 @@ const CollectionCard = ({ item, AddBasket, AddWishlist }) => {
         <div className={styles.imgBox}>
           <img src={item.image} alt="collection" />
           <div className={styles.buttons}>
-            <button onClick={(event) => handleAddToWishlist(event)}>
-              <FaRegHeart />
+            <button onClick={handleToggleWishlist}>
+              {isWished ? <FaHeart style={{ color: "red" }} /> : <FaRegHeart />}
             </button>
-
-            <button onClick={(event) => handleAddToBasket(event)}>
+            <button onClick={handleAddToBasket}>
               <HiOutlineShoppingBag />
             </button>
-
           </div>
         </div>
         <div className={styles.text}>
           <h3>{item.title}</h3>
           <p>{item.price}$</p>
-
         </div>
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CollectionCard
+export default CollectionCard;
