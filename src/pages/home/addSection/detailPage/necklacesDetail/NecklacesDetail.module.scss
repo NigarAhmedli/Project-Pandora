@@ -1,23 +1,22 @@
 .container {
-  max-width: 1200px;
-  margin: 40px auto;
   display: flex;
-  gap: 50px;
-  padding: 20px;
   flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
   justify-content: center;
   align-items: center;
 }
 
 .imageBox {
   flex: 1;
+  min-width: 300px;
   max-width: 500px;
-
   img {
     width: 100%;
     height: auto;
-    border-radius: 10px;
-    object-fit: cover;
+    border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
 }
@@ -25,9 +24,6 @@
 .info {
   flex: 1 1 300px;
   max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 
   h2 {
     font-size: 30px;
@@ -47,7 +43,7 @@
     line-height: 1.5;
   }
 
-  .btn {
+  .button {
     background-color: #000;
     color: #fff;
     padding: 12px 24px;
@@ -61,37 +57,10 @@
     }
   }
 }
-.loading,
-.error,
-.notFound {
-  text-align: center;
-  margin-top: 100px;
-  font-size: 20px;
-}
 
-/* Responsive */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
     padding: 20px;
-  }
-
-  .info {
-    h2 {
-      font-size: 24px;
-    }
-
-    .price {
-      font-size: 20px;
-    }
-
-    .description {
-      font-size: 16px;
-    }
-
-    .btn {
-      width: 100%;
-      padding: 12px 0;
-    }
   }
 }

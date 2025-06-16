@@ -1,24 +1,20 @@
 .container {
-  max-width: 1200px;
-  margin: 40px auto;
   display: flex;
-  gap: 50px;
-  padding: 20px;
   flex-wrap: wrap;
+  gap: 40px;
+  padding: 40px;
   justify-content: center;
-  align-items: center;
+  align-items: center; // əvvəl: flex-start
 }
 
 .imageBox {
-  flex: 1;
-  max-width: 500px;
+  flex: 1 1 300px;
+  max-width: 400px;
 
   img {
     width: 100%;
-    height: auto;
-    border-radius: 10px;
-    object-fit: cover;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -47,7 +43,7 @@
     line-height: 1.5;
   }
 
-  .btn {
+  .button {
     background-color: #000;
     color: #fff;
     padding: 12px 24px;
@@ -61,12 +57,13 @@
     }
   }
 }
+
 .loading,
 .error,
 .notFound {
   text-align: center;
-  margin-top: 100px;
-  font-size: 20px;
+  margin-top: 40px;
+  font-size: 18px;
 }
 
 /* Responsive */
@@ -74,6 +71,13 @@
   .container {
     flex-direction: column;
     padding: 20px;
+    align-items: center;
+  }
+
+  .imageBox, .info {
+    max-width: 100%;
+    text-align: center;
+    align-items: center;
   }
 
   .info {
@@ -86,12 +90,12 @@
     }
 
     .description {
-      font-size: 16px;
+      font-size: 15px;
     }
 
-    .btn {
+    .button {
       width: 100%;
-      padding: 12px 0;
+      max-width: 280px;
     }
   }
 }

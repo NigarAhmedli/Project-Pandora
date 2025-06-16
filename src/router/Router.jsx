@@ -46,6 +46,11 @@ const Router = () => {
           <Route path="/register" element={<RegisterContent />} />
           <Route path="/login" element={<LoginSec />} />
           <Route path="/product/:id" element={<DetailPage />} />
+          <Route path="/charms/:id" element={<DetailPage />} />
+          <Route path="/bracelet/:id" element={<DetailPage/>} />
+          <Route path="/necklaces/:id" element={<DetailPage/>} />
+          <Route path="/rings/:id" element={<DetailPage/>} />
+          <Route path="/collection/:id" element={<DetailPage />} />
           <Route element={<PrivRouter />}>
             <Route path="/profile" element={<Profile/>} />
           </Route>

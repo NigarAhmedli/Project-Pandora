@@ -1,0 +1,98 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center; // əvvəllər: flex-start
+  gap: 40px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.imageBox {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.info {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; // soldan düzülmə
+
+  h2 {
+    font-size: 30px;
+    margin-bottom: 12px;
+  }
+
+  .price {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #b48b3c;
+  }
+
+  .description {
+    font-size: 19px;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .button {
+    padding: 10px 24px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: #333;
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .imageBox, .info {
+    max-width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .info h2 {
+    font-size: 24px;
+  }
+
+  .info .price {
+    font-size: 20px;
+  }
+
+  .info .description {
+    font-size: 17px;
+  }
+
+  .info .button {
+    width: 100%;
+    max-width: 280px;
+  }
+}
