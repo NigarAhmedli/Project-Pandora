@@ -16,11 +16,15 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (userData, { r
 // User register
 export const registerUser = createAsyncThunk('auth/registerUser', async (userData, { rejectWithValue }) => {
   try {
+    console.log("İstifadəçi göndərilir:", userData); 
     const { data } = await axios.post('http://localhost:5000/api/users/signup', userData, {
       withCredentials: true, // Cookie göndərmək üçün
     });
     return data;
   } catch (error) {
+     console.log("Serverdən error:", error.response?.data || error.message);
+     console.log("İstifadəçi göndərilir:", userData);  // email burada doğru görünür?
+
     return rejectWithValue(error.response.data);
   }
 });

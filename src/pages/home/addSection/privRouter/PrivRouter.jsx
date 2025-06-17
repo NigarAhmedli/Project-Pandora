@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Navigate, Outlet } from 'react-router-dom';
 
 const PrivRouter = () => {
-  return (
-    <div>PrivRouter</div>
-  )
-}
+  const user = useSelector(state => state.auth.user); // authSlice-dan istifadəçi məlumatı
 
-export default PrivRouter
+  return user ? <Outlet /> : <Navigate to="/login" />;
+};
+
+export default PrivRouter;
