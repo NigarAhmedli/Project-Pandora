@@ -28,11 +28,12 @@ const Profile = () => {
   return (
     <div className={styles.profileContainer}>
       <div className={styles.card}>
-        <img
-          src={user.avatar || defaultAvatar}
-          alt="User"
-          className={styles.avatar}
-        />
+      <img
+  src={user.avatar ? `http://localhost:5000${user.avatar}` : defaultAvatar}
+  alt="User"
+  className={styles.avatar}
+/>
+
         <h2>{user.name || 'Ad yoxdur'}</h2>
         <p><strong>Email:</strong> {user.email || '—'}</p>
         <p><strong>Telefon:</strong> {user.phone || '—'}</p>

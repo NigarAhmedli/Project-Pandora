@@ -37,7 +37,11 @@ const handleSubmit = async (e) => {
       <form className={styles['register-form']} onSubmit={handleSubmit}>
         <h2>Create an Account</h2>
 
-        {error && <p className={styles['error-message']}>{error.message || 'An error occurred'}</p>}
+        {error && (
+  <p className={styles['error-message']}>
+    {typeof error === 'string' ? error : error.message || 'An error occurred'}
+  </p>
+)}
 
         <input
           type="text"

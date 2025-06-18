@@ -13,6 +13,33 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (userData, { r
   }
 });
 
+//EditProfile
+export const updateUser = createAsyncThunk(
+  'auth/updateUser',
+  async (updatedData, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        'http://localhost:5000/api/users/update',
+        updatedData,
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'multipart/form-data', // bu mütləqdir!
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || 'Xəta baş verdi');
+    }
+  }
+);
+
+
+
+
+
+
 // User register
 export const registerUser = createAsyncThunk('auth/registerUser', async (userData, { rejectWithValue }) => {
   try {
@@ -21,12 +48,11 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
       withCredentials: true, // Cookie göndərmək üçün
     });
     return data;
-  } catch (error) {
-     console.log("Serverdən error:", error.response?.data || error.message);
-     console.log("İstifadəçi göndərilir:", userData);  // email burada doğru görünür?
+ } catch (error) {
+  console.log("Serverdən error:", error.response?.data || error.message || error);
+  return rejectWithValue(error.response?.data?.message || "Qeydiyyatda xəta baş verdi");
+}
 
-    return rejectWithValue(error.response.data);
-  }
 });
 
 // Logout
@@ -70,15 +96,52 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+    //EditProfile
+.addCase(updateUser.pending, (state) => {
+  state.loading = true;
+  state.error = null;
+})
+
+.addCase(updateUser.fulfilled, (state, action) => {
+  state.loading = false;
+  state.user = {
+    _id: action.payload._id,
+    name: action.payload.name,
+    email: action.payload.email,
+    phone: action.payload.phone || "",     
+    avatar: action.payload.avatar || "",  
+  };
+  localStorage.setItem('user', JSON.stringify(state.user)); 
+})
+
+
+
+
+.addCase(updateUser.rejected, (state, action) => {
+  state.loading = false;
+  state.error = action.payload;
+})
+
+
+
       // Login
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload;
-      })
+     .addCase(loginUser.fulfilled, (state, action) => {
+  state.loading = false;
+  state.user = {
+    _id: action.payload._id,
+    name: action.payload.name,
+    email: action.payload.email,
+    phone: action.payload.phone || "",
+    avatar: action.payload.avatar || "",
+  };
+  localStorage.setItem('user', JSON.stringify(state.user)); // ✅ Əlavə et
+})
+
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
@@ -118,11 +181,21 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
+
       .addCase(getUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload;
-        localStorage.setItem('user', JSON.stringify(action.payload)); 
-      })
+  state.loading = false;
+  state.user = {
+    _id: action.payload._id,
+    name: action.payload.name,
+    email: action.payload.email,
+    phone: action.payload.phone || "",    
+    avatar: action.payload.avatar || "",     
+  };
+  localStorage.setItem('user', JSON.stringify(state.user));
+})
+
+
+
       .addCase(getUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;

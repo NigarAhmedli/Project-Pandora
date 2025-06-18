@@ -22,6 +22,7 @@ import Payment from "../pages/home/addSection/payment/Payment";
 import Succes from "../pages/home/addSection/payment/succes/Succes";
 import NotFound from "../pages/home/notFound/NotFound";
 import CollectionSec from "../pages/home/addSection/collectionsSec/CollectionSec";
+import EditProfile from "../pages/home/addSection/editProfile/EditProfile";
 
 const Router = () => {
   return (
@@ -53,6 +54,7 @@ const Router = () => {
           <Route path="/collection/:id" element={<DetailPage />} />
           <Route element={<PrivRouter />}>
             <Route path="/profile" element={<Profile/>} />
+             <Route path="/edit-profile" element={<EditProfile />} />
           </Route>
            <Route path='/payment' element={<Payment/>} />
             <Route path='/payment-success' element={<Succes/>} />
