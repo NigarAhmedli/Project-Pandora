@@ -7,6 +7,7 @@ import {
   updateBasketThunk,
   deleteBasketThunk
 } from '../../../../../redux/reducers/basketSlice';
+import { createPaymentIntentThunk } from '../../../../../redux/reducers/paymentSlice';
 
 const Basket = () => {
   const navigate = useNavigate();
@@ -51,15 +52,46 @@ const Basket = () => {
   const handleDelete = (id) => {
     dispatch(deleteBasketThunk(id));
   };
-
-  const handleCheckout = async () => {
-    const totalAmount = getTotalAmount();
+const handleCheckout = async () => {
+    const totalAmount = getTotalAmount();  
     if (basket.length === 0) {
-      alert("Səbət boşdur!");
+      alert("Səbətiniz boşdur!");  
       return;
     }
-    alert(`Sifarişiniz qəbul edildi. Məbləğ: $${totalAmount.toFixed(2)}`);
+    
+    try {
+      // Ödəniş intentini yaratmaq üçün redux thunk-ı çağırırıq
+      const action = await dispatch(createPaymentIntentThunk(totalAmount * 100)); // Cəmi sentlə göndəririk
+      
+      if (createPaymentIntentThunk.fulfilled.match(action)) {
+        const clientSecret = action.payload;
+        console.log("✅ Alınan clientSecret:", clientSecret);  
+  
+        if (!clientSecret) {
+          console.error("❌ clientSecret alınmadı!");
+          alert("Ödəniş üçün lazımi məlumat tapılmadı.");
+          return;
+        }
+  
+        // `clientSecret` və digər məlumatları `PaymentPage`-ə göndəririk
+        navigate("/payment", { 
+          state: { 
+            basket, 
+            totalAmount, 
+            clientSecret  // `clientSecret`-i burda göndəririk
+          }
+        });
+      } else {
+        throw new Error("Ödəniş alınmadı!");
+      }
+    } catch (error) {
+      console.error("❌ Ödəniş zamanı xəta:", error);
+      alert("Ödəniş əməliyyatı zamanı xəta baş verdi.");
+    }
   };
+  
+
+
 
   return (
     <div className={styles.container}>

@@ -9,6 +9,8 @@ import necklacesSlice from "./reducers/necklacesSlice";
 import ringsSlice from "./reducers/ringsSlice";
 import collectionSlice from "./reducers/collectionSlice";
 import  authSlice  from "./reducers/authSlice";
+import paymentSlice from './reducers/paymentSlice';
+
 
 export const store=configureStore({
 
@@ -23,6 +25,7 @@ export const store=configureStore({
   rings:ringsSlice,
   collection:collectionSlice,
   auth:authSlice,
+  payment:paymentSlice
   
     }
   
