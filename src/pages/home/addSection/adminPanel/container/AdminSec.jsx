@@ -6,6 +6,9 @@ import { useFormik } from 'formik';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { deleteCharmsThunk, getCharmsThunk, postCharmsThunk } from '../../../../../redux/reducers/charmsSlice';
 import { getBraceletThunk, postBraceletThunk, deleteBraceletThunk } from '../../../../../redux/reducers/braceletSlice';
+import { deleteNecklacesThunk, getNecklacesThunk, postNecklacesThunk } from '../../../../../redux/reducers/necklacesSlice';
+import { deleteCollectionThunk, getCollectionThunk, postCollectionThunk } from '../../../../../redux/reducers/collectionSlice';
+import { deleteRingsThunk, getRingsThunk, postRingsThunk } from '../../../../../redux/reducers/ringsSlice';
 
 
 const AdminSec = () => {
@@ -16,6 +19,10 @@ const AdminSec = () => {
   const products = useSelector((state) => state.products.products);
   const loading = useSelector((state) => state.products.loading);
   const error = useSelector((state) => state.products.error);
+  const necklaces = useSelector((state) => state.necklaces.necklaces);
+const collection = useSelector((state) => state.collection.collection);
+const rings = useSelector((state) => state.rings.rings);
+
 
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
@@ -75,6 +82,49 @@ const filteredBracelets = bracelet
       return 0;
     });
 
+
+    const filteredNecklaces = necklaces
+  ?.filter((item) => item?.title?.toLowerCase().includes(searchTerm.toLowerCase()))
+  ?.sort((a, b) => {
+    if (sortBy === 'price') {
+      return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
+    } else if (sortBy === 'title') {
+      return sortOrder === 'asc'
+        ? a.title.localeCompare(b.title)
+        : b.title.localeCompare(a.title);
+    }
+    return 0;
+  });
+
+const filteredCollection = collection
+  ?.filter((item) => item?.title?.toLowerCase().includes(searchTerm.toLowerCase()))
+  ?.sort((a, b) => {
+    if (sortBy === 'price') {
+      return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
+    } else if (sortBy === 'title') {
+      return sortOrder === 'asc'
+        ? a.title.localeCompare(b.title)
+        : b.title.localeCompare(a.title);
+    }
+    return 0;
+  });
+
+const filteredRings = rings
+  ?.filter((item) => item?.title?.toLowerCase().includes(searchTerm.toLowerCase()))
+  ?.sort((a, b) => {
+    if (sortBy === 'price') {
+      return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
+    } else if (sortBy === 'title') {
+      return sortOrder === 'asc'
+        ? a.title.localeCompare(b.title)
+        : b.title.localeCompare(a.title);
+    }
+    return 0;
+  });
+
+
+
+
   const getSortButtonLabel = () => {
     if (sortBy === 'price') {
       return sortOrder === 'asc' ? 'Ən ucuzdan bahaya' : 'Ən bahadan ucuza';
@@ -100,6 +150,14 @@ onSubmit: async (values, { resetForm }) => {
     } else if (values.category === 'bracelet') {
       await dispatch(postBraceletThunk(values)); // <-- bracelet üçün ayrıca
     }
+    else if (values.category === 'necklaces') {
+  await dispatch(postNecklacesThunk(values));
+} else if (values.category === 'collection') {
+  await dispatch(postCollectionThunk(values));
+} else if (values.category === 'rings') {
+  await dispatch(postRingsThunk(values));
+}
+
     resetForm();
     setIsFormVisible(false);
   } catch (error) {
@@ -113,7 +171,10 @@ onSubmit: async (values, { resetForm }) => {
   useEffect(() => {
     dispatch(getProductsThunk());
     dispatch(getCharmsThunk());
-    dispatch(getBraceletThunk())
+    dispatch(getBraceletThunk());
+      dispatch(getNecklacesThunk());
+  dispatch(getCollectionThunk());
+  dispatch(getRingsThunk());
   }, [dispatch]);
 
   if (loading) return <p className={styles.loading}>Yüklənir....</p>;
@@ -145,6 +206,10 @@ onSubmit: async (values, { resetForm }) => {
   <option value="products">Products</option>
   <option value="charms">Charms</option>
   <option value="bracelet">Bracelet</option> 
+  <option value="necklaces">Necklaces</option>
+<option value="collection">Collection</option>
+<option value="rings">Rings</option>
+
 </select>
 
 
@@ -230,6 +295,94 @@ onSubmit: async (values, { resetForm }) => {
             ))}
         </tbody>
       </table>
+
+
+<h2>Necklaces</h2>
+<table className={styles.productTable}>
+  <thead>
+    <tr>
+      <th>Şəkil</th>
+      <th>Başlıq</th>
+      <th>Qiymət</th>
+      <th>Funksiya</th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredNecklaces?.map((item) => (
+      <tr key={item._id}>
+        <td>
+          <img className={styles.productImage} src={item.image} alt={item.title} />
+        </td>
+        <td>{item.title}</td>
+        <td>{item.price}$</td>
+        <td>
+          <button className={styles.deleteButton} onClick={() => dispatch(deleteNecklacesThunk(item._id))}>Sil</button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+
+
+<h2>Collection</h2>
+<table className={styles.productTable}>
+  <thead>
+    <tr>
+      <th>Şəkil</th>
+      <th>Başlıq</th>
+      <th>Qiymət</th>
+      <th>Funksiya</th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredCollection?.map((item) => (
+      <tr key={item._id}>
+        <td>
+          <img className={styles.productImage} src={item.image} alt={item.title} />
+        </td>
+        <td>{item.title}</td>
+        <td>{item.price}$</td>
+        <td>
+          <button className={styles.deleteButton} onClick={() => dispatch(deleteCollectionThunk(item._id))}>Sil</button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+
+
+<h2>Rings</h2>
+<table className={styles.productTable}>
+  <thead>
+    <tr>
+      <th>Şəkil</th>
+      <th>Başlıq</th>
+      <th>Qiymət</th>
+      <th>Funksiya</th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredRings?.map((item) => (
+      <tr key={item._id}>
+        <td>
+          <img className={styles.productImage} src={item.image} alt={item.title} />
+        </td>
+        <td>{item.title}</td>
+        <td>{item.price}$</td>
+        <td>
+          <button className={styles.deleteButton} onClick={() => dispatch(deleteRingsThunk(item._id))}>Sil</button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+
+
+
+
 
       <h2>Products</h2>
       <table className={styles.productTable}>
