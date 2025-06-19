@@ -148,7 +148,7 @@ onSubmit: async (values, { resetForm }) => {
     } else if (values.category === 'charms') {
       await dispatch(postCharmsThunk(values));
     } else if (values.category === 'bracelet') {
-      await dispatch(postBraceletThunk(values)); // <-- bracelet üçün ayrıca
+      await dispatch(postBraceletThunk(values)); 
     }
     else if (values.category === 'necklaces') {
   await dispatch(postNecklacesThunk(values));
