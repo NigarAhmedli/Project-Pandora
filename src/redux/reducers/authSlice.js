@@ -130,7 +130,9 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-     .addCase(loginUser.fulfilled, (state, action) => {
+
+
+      .addCase(loginUser.fulfilled, (state, action) => {
   state.loading = false;
   state.user = {
     _id: action.payload._id,
@@ -138,9 +140,11 @@ const authSlice = createSlice({
     email: action.payload.email,
     phone: action.payload.phone || "",
     avatar: action.payload.avatar || "",
+    role: action.payload.role || "", 
   };
-  localStorage.setItem('user', JSON.stringify(state.user)); // ✅ Əlavə et
+  localStorage.setItem('user', JSON.stringify(state.user));
 })
+
 
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
@@ -182,7 +186,7 @@ const authSlice = createSlice({
         state.error = null;
       })
 
-      .addCase(getUser.fulfilled, (state, action) => {
+.addCase(getUser.fulfilled, (state, action) => {
   state.loading = false;
   state.user = {
     _id: action.payload._id,
@@ -190,9 +194,11 @@ const authSlice = createSlice({
     email: action.payload.email,
     phone: action.payload.phone || "",    
     avatar: action.payload.avatar || "",     
+    role: action.payload.role || "", 
   };
   localStorage.setItem('user', JSON.stringify(state.user));
 })
+
 
 
 

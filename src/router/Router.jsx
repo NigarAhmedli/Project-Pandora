@@ -23,6 +23,7 @@ import Succes from "../pages/home/addSection/payment/succes/Succes";
 import NotFound from "../pages/home/notFound/NotFound";
 import CollectionSec from "../pages/home/addSection/collectionsSec/CollectionSec";
 import EditProfile from "../pages/home/addSection/editProfile/EditProfile";
+import AdminRoute from "../routes/AdminRoute";
 
 const Router = () => {
   return (
@@ -39,6 +40,9 @@ const Router = () => {
           <Route path="/basket" element={<BasketSec />} />
           <Route path="/wishlist" element={<WishlistSec />} />
           <Route path="/adminpanel" element={<AdminPanel />} />
+          <Route
+  path="/adminpanel" element={ <AdminRoute><AdminPanel /></AdminRoute> }/>
+
           <Route path="/charms" element={<CharmSec />} />
           <Route path="/bracelet" element={<BraceletSec />} />
           <Route path="/rings" element={<RingSec />} />
