@@ -6,7 +6,7 @@ import styles from "./Charm.module.scss";
 import CharmsCard from '../../../../../../components/card/charmsCard/CharmsCard';
 import { getCharmsThunk } from '../../../../../../redux/reducers/charmsSlice';
 import { getWishlistThunk } from '../../../../../../redux/reducers/wishlistSlice';
-import { postBasketThunk } from '../../../../../../redux/reducers/basketSlice';
+import { getBasketThunk, postBasketThunk } from '../../../../../../redux/reducers/basketSlice';
 
 const Charm = () => {
     const dispatch = useDispatch();
@@ -25,9 +25,11 @@ const Charm = () => {
         dispatch(getWishlistThunk());
     }, [dispatch]);
 
-    const AddBasket = (item) => {
-        dispatch(postBasketThunk(item));
-    };
+   const AddBasket = async (item) => {
+  await dispatch(postBasketThunk(item));   // məhsulu əlavə et
+  dispatch(getBasketThunk());              // səbəti yenilə
+};
+
 
     // Filter + Sort
     const filteredCharms = charms

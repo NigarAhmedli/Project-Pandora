@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styles from "./Category.module.scss";
-import { postBasketThunk } from '../../../../../../redux/reducers/basketSlice';
+import { getBasketThunk, postBasketThunk } from '../../../../../../redux/reducers/basketSlice';
 import { getCollectionThunk } from '../../../../../../redux/reducers/collectionSlice';
 import CollectionCard from '../../../../../../components/card/collectionCard/CollectionCard';
 import { deleteWishlistThunk, postWishlistThunk } from '../../../../../../redux/reducers/wishlistSlice';
@@ -24,9 +24,10 @@ const Category = () => {
         dispatch(getCollectionThunk());
     }, [dispatch]);
 
-    const AddBasket = (item) => {
-        dispatch(postBasketThunk(item));
-    };
+    const AddBasket = async (item) => {
+    await dispatch(postBasketThunk(item));   // məhsulu əlavə et
+    dispatch(getBasketThunk());              // səbəti yenilə
+  };
 
     const toggleWishlist = (item) => {
         const existing = wishlist.find(w => w._id === item._id);

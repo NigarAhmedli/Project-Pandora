@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styles from "./Bracelet.module.scss";
-import { postBasketThunk } from '../../../../../../redux/reducers/basketSlice';
+import { getBasketThunk, postBasketThunk } from '../../../../../../redux/reducers/basketSlice';
 import BraceletCard from '../../../../../../components/card/braceletCard/BraceletCard';
 import { getBraceletThunk } from '../../../../../../redux/reducers/braceletSlice';
 import { getWishlistThunk } from '../../../../../../redux/reducers/wishlistSlice';
@@ -25,8 +25,9 @@ const Bracelet = () => {
         dispatch(getWishlistThunk());
     }, [dispatch]);
 
-    const AddBasket = (item) => {
-        dispatch(postBasketThunk(item));
+      const AddBasket = async (item) => {
+      await dispatch(postBasketThunk(item));   // məhsulu əlavə et
+      dispatch(getBasketThunk());              // səbəti yenilə
     };
 
     const filteredBracelet = bracelet

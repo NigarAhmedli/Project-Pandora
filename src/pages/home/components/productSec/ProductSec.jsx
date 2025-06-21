@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ProductCard from '../../../../components/card/productCard/ProductCard';
 import { getProductsThunk } from '../../../../redux/reducers/productSlice';
 import styles from "./ProductSec.module.scss";
-import { postBasketThunk } from '../../../../redux/reducers/basketSlice';
+import { getBasketThunk, postBasketThunk } from '../../../../redux/reducers/basketSlice';
 import { getWishlistThunk } from '../../../../redux/reducers/wishlistSlice';
 
 const ProductSec = () => {
@@ -24,9 +24,10 @@ const ProductSec = () => {
         dispatch(getWishlistThunk()); 
     }, [dispatch]);
 
-    const AddBasket = (item) => {
-        dispatch(postBasketThunk(item));
-    };
+    const AddBasket = async (item) => {
+  await dispatch(postBasketThunk(item));  // məhsulu əlavə et
+  dispatch(getBasketThunk());             // səbəti yenilə
+};
 
     // Filter + Sort
     const filteredProducts = products

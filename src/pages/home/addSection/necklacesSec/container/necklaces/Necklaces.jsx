@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styles from "./Necklaces.module.scss";
-import { postBasketThunk } from '../../../../../../redux/reducers/basketSlice';
+import { getBasketThunk, postBasketThunk } from '../../../../../../redux/reducers/basketSlice';
 import { getNecklacesThunk } from '../../../../../../redux/reducers/necklacesSlice';
 import NecklacesCard from '../../../../../../components/card/necklacesCard/NecklacesCard';
 import { getWishlistThunk } from '../../../../../../redux/reducers/wishlistSlice';
@@ -25,9 +25,10 @@ const Necklaces = () => {
         dispatch(getWishlistThunk());
     }, [dispatch]);
 
-    const AddBasket = (item) => {
-        dispatch(postBasketThunk(item));
-    };
+     const AddBasket = async (item) => {
+     await dispatch(postBasketThunk(item));   // məhsulu əlavə et
+     dispatch(getBasketThunk());              // səbəti yenilə
+   };
 
     const filteredNecklaces = necklaces
         ?.filter(item =>

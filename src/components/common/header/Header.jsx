@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './Header.module.scss'
 import { IoIosSearch } from "react-icons/io";
 import { PiHeartLight } from "react-icons/pi";
@@ -9,12 +9,25 @@ import { PiUserCircleThin } from "react-icons/pi";
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { HiOutlineBars3 } from "react-icons/hi2";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBasketThunk } from '../../../redux/reducers/basketSlice';
 
 const Header = () => {
 
   const user = useSelector((state) => state.auth.user);
   console.log("USER:", JSON.stringify(user, null, 2));
+const basket = useSelector((state) => state.basket.basket);
+const basketCount = basket.length;
+
+
+
+const dispatch = useDispatch();
+
+useEffect(() => {
+  dispatch(getBasketThunk());
+  dispatch(getBasketThunk());
+
+}, [dispatch]);
 
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -59,10 +72,6 @@ const Header = () => {
           />
           </div>
 
-          <div className={style.text}>
-            <IoIosSearch />
-            <input type="text" placeholder="Search" />
-          </div>
 
           <div className={style.icons}>
             <div onClick={goToWishlist} className={style.icon}>
@@ -74,9 +83,14 @@ const Header = () => {
             <div onClick={goToRegister} className={style.icon}>
               <CiUser />
             </div>
-            <div onClick={goToBasket} className={style.icon}>
-              <LiaShoppingBagSolid />
+                <div onClick={goToBasket} className={style.basketWrapper}>
+              <LiaShoppingBagSolid className={style.basketIcon} />
+              {basketCount > 0 && (
+                <span className={style.badge}>{basketCount}</span>
+              )}
             </div>
+
+
           </div>
 
           <div className={style.navbar}>

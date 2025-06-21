@@ -38,34 +38,12 @@
         }
       }
 
-      .text {
-        width: 30%;
-        display: flex;
-        align-items: center;
-        background-color: white;
-        padding: 8px 8px;
-
-        svg {
-          font-size: 27px;
-          color: #474747;
-        }
-
-        input {
-          border: none;
-          outline: none;
-          background: white;
-          font-size: 15px;
-          margin-left: 10px;
-          width: 100%;
-          color: #333;
-        }
-      }
-
    .icons {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 15px;
+
 
   .icon {
     position: relative;
@@ -98,6 +76,43 @@
       color: #ff69b4;
     }
   }
+
+
+.basketWrapper {
+  position: relative;
+  cursor: pointer;
+
+  .basketIcon {
+    font-size: 24px;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+
+  .badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 18px;
+    text-align: center;
+  }
+
+  &:hover .basketIcon {
+    color: #ff69b4;
+  }
+}
+
+
+
+
+
+
 }
 
 
