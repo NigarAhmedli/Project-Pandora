@@ -24,6 +24,7 @@ import NotFound from "../pages/home/notFound/NotFound";
 import CollectionSec from "../pages/home/addSection/collectionsSec/CollectionSec";
 import EditProfile from "../pages/home/addSection/editProfile/EditProfile";
 import AdminRoute from "../routes/AdminRoute";
+import Dashboard from "../pages/home/addSection/adminPanel/dashboard/Dashboard";
 
 const Router = () => {
   return (
@@ -39,7 +40,8 @@ const Router = () => {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/basket" element={<BasketSec />} />
           <Route path="/wishlist" element={<WishlistSec />} />
-          <Route path="/adminpanel" element={<AdminPanel />} />
+          
+           <Route path="/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>  } />
           <Route
   path="/adminpanel" element={ <AdminRoute><AdminPanel /></AdminRoute> }/>
 
