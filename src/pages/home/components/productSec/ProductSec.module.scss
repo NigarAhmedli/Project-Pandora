@@ -1,7 +1,7 @@
 .section {
   width: 100%;
   padding: 60px 20px;
-  background-color: white;
+  background-color: var(--body_background);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +11,7 @@
 
     h1 {
       font-size: 40px;
-      color: black;
+      color: var(--body_color);
       font-weight: bold;
     }
   }
@@ -32,9 +32,10 @@
       outline: none;
       transition: all 0.3s;
       width: 220px;
+      background-color: var(--body_background);
 
       &:focus {
-        border-color: black;
+        border-color: var(--body_color);
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
       }
     }
@@ -45,24 +46,24 @@
       border: 1px solid #ccc;
       border-radius: 10px;
       outline: none;
-      background-color: #f9f9f9;
+      background-color: var(--text_color);
       cursor: pointer;
       transition: all 0.3s;
+      color: var(--body_color);
 
-      &:hover {
-        background-color: #ececec;
-      }
+      
     }
 
     .sortButton {
       padding: 10px 20px;
       font-size: 16px;
-      border: none;
-      background-color: black;
-      color: white;
+      border: 1px solid var(--body_color);
+      background-color:var(--body_background);
+      color: var(--body_color);
       border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s;
+
 
       &:hover {
         background-color: #333;
@@ -76,9 +77,10 @@
     gap: 25px;
     width: 100%;
     max-width: 1200px;
+    color: var(--body_color);
 
     .productWrapper {
-      background: white;
+      background: var(--body_background);
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s;
@@ -90,7 +92,7 @@
       a {
         display: block;
         text-decoration: none;
-        color: black;
+        color: var(--body_color);
       }
     }
   }
@@ -105,7 +107,7 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background-color: #ccc;
+      background-color: var(--text_color);
       cursor: pointer;
       transition: background-color 0.3s;
 
@@ -115,7 +117,7 @@
     }
 
     .active {
-      background-color: black;
+      background-color: var(--body_color);
     }
   }
 }

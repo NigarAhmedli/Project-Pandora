@@ -11,6 +11,7 @@ import 'react-modern-drawer/dist/index.css'
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { useDispatch, useSelector } from 'react-redux';
 import { getBasketThunk } from '../../../redux/reducers/basketSlice';
+import DarkMode from '../../darkMode/DarkMode';
 
 const Header = () => {
 
@@ -74,6 +75,7 @@ useEffect(() => {
 
 
           <div className={style.icons}>
+              <DarkMode/>
             <div onClick={goToWishlist} className={style.icon}>
               <PiHeartLight />
             </div>

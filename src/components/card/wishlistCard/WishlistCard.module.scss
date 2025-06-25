@@ -8,7 +8,7 @@
 .card {
   width: 100%;
   max-width: 320px;
-  background-color: #ffffff;
+   background-color: var(--body_background);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease;
@@ -62,7 +62,7 @@
   h3 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #333;
+     color: var(--body_color);
   }
 
   p {

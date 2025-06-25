@@ -5,6 +5,7 @@
   width: 100%;
   padding: 3rem 1rem;
   font-family: "Poppins", sans-serif;
+    background-color: var(--body_background);
 }
 
 .header {
@@ -14,9 +15,9 @@
   h1 {
     font-size: 2.4rem;
     font-weight: 600;
-    color: #252525;
     position: relative;
     display: inline-block;
+          color: var(--body_color);
 
     &::after {
       content: "";
@@ -46,7 +47,8 @@
     border: 1px solid #ccc;
     font-size: 1rem;
     outline: none;
-    background-color: white;
+    background-color: var(--text_color);
+    
   }
 
   .sortButton {
@@ -78,6 +80,7 @@
 .braceletWrapper {
   width: 260px;
   transition: transform 0.3s ease;
+   background: var(--body_background);
 
   &:hover {
     transform: translateY(-5px);

@@ -1,59 +1,74 @@
 .section {
-  padding: 20px;
-  max-width: 1200px;
-  margin: auto;
+  width: 100%;
+  padding: 60px 20px;
+  background-color: var(--body_background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header {
-  text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 
   h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    border-bottom: 2px solid #444;
-    display: inline-block;
-    padding-bottom: 5px;
+    font-size: 40px;
+      color: var(--body_color);
+      font-weight: bold;
   }
 }
 
 .controlPanel {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
 
   .searchInput,
   .sortSelect,
   .sortButton {
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
+  padding: 10px 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      outline: none;
+      transition: all 0.3s;
+      width: 220px;
+      background-color: var(--body_background);
   }
 
   .sortButton {
-    cursor: pointer;
-    background-color: #333;
-    color: white;
-    border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: 1px solid var(--body_color);
+      background-color:var(--body_background);
+      color: var(--body_color);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
   }
 
   .sortButton:hover {
-    background-color: #555;
+   background-color: #333;
   }
 }
 
 .collection {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+   display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;
+    color: var(--body_color);
 
   .collectionWrapper {
-    width: 250px;
-    transition: transform 0.3s ease;
+     width: 100%;
+  height: 100%;
+   background: var(--body_background);
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s;
 
     .collectionLink {
       text-decoration: none;
@@ -61,6 +76,9 @@
     }
 
     .card {
+       width: 100%;
+    height: 100%;
+    max-width: 100%;
       background-color: #fff;
       border-radius: 8px;
       overflow: hidden;
@@ -95,6 +113,7 @@
       .text {
         padding: 10px;
         text-align: center;
+        
 
         h3 {
           font-size: 1.1rem;
@@ -128,26 +147,55 @@
   }
 }
 
-/* -------------- RESPONSIVE -------------- */
 
-@media (max-width: 1024px) {
-  .collectionWrapper {
-    width: 45%;
+@media (min-width: 701px) and (max-width: 1024px) {
+  .collection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // iki sütun
+    gap: 25px;
+    justify-items: center;
   }
 
-  .header h1 {
-    font-size: 1.8rem;
+  .collectionWrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .card {
+    height: auto;
+    .imgBox {
+      height: 250px;
+    }
+
+    .text h3 {
+      font-size: 15px;
+    }
+
+    .text p {
+      font-size: 13px;
+    }
   }
 }
 
+
+
 @media (max-width: 700px) {
+  .collection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
   .collectionWrapper {
     width: 100%;
+    max-width: 90%;
   }
 
   .controlPanel {
     flex-direction: column;
     align-items: center;
+    gap: 10px;
 
     .searchInput,
     .sortSelect,
@@ -158,5 +206,10 @@
 
   .header h1 {
     font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .paginationDots {
+    margin-top: 20px;
   }
 }

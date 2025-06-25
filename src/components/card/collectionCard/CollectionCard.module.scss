@@ -17,7 +17,7 @@
   max-width: 250px;
   height: 400px;
   overflow: hidden;
-  background-color: white;
+    background-color: var(--body_background);
   border-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   gap: 13px;
@@ -75,17 +75,20 @@
     gap: 7px;
     padding: 10px;
     text-align: center;
+      color: var(--body_color);
+
 
     h3 {
       font-size: 16px;
       font-weight: 600;
-      color: #333;
+      
     }
 
     p {
       font-size: 14px;
       font-weight: bold;
-      color: #444;
+      color: var(--body_color);
+
     }
   }
 }
@@ -114,14 +117,18 @@
   }
 }
 
-/* Planşet (701-1024px) */
 @media (min-width: 701px) and (max-width: 1024px) {
+  .container {
+    justify-content: space-evenly; 
+  }
+
   .card {
-    max-width: 45%;
+    max-width: 47%; 
     height: auto;
+    padding: 10px; 
 
     .imgBox {
-      height: 230px;
+      height: 250px; 
     }
 
     .text {
