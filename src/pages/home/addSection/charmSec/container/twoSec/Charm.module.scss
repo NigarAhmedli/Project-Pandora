@@ -43,7 +43,7 @@ width: 100%;
        background-color: var(--text_color);
       cursor: pointer;
       transition: all 0.3s;
-      color: var(--body_color);
+      color: gray;
 }
 
 .sortButton {
@@ -59,7 +59,7 @@ width: 100%;
 }
 
 .sortButton:hover {
-  background-color: #333;
+  background-color: black;
 }
 
 /* Products */

@@ -50,7 +50,7 @@ const Charm = () => {
 
     // Pagination
     const [page, setPage] = useState(1);
-    const charmsPage = 8;
+    const charmsPage = 4;
     const lastCharmsIndex = page * charmsPage;
     const firstCharmsIndex = lastCharmsIndex - charmsPage;
     const currentCharms = filteredCharms.slice(firstCharmsIndex, lastCharmsIndex);

@@ -18,7 +18,8 @@ const Header = () => {
   const user = useSelector((state) => state.auth.user);
   console.log("USER:", JSON.stringify(user, null, 2));
 const basket = useSelector((state) => state.basket.basket);
-const basketCount = basket.length;
+const basketCount = basket.reduce((total, item) => total + (item.quantity || 1), 0);
+
 
 
 

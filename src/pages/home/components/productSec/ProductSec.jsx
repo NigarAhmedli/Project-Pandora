@@ -24,10 +24,12 @@ const ProductSec = () => {
         dispatch(getWishlistThunk()); 
     }, [dispatch]);
 
-    const AddBasket = async (item) => {
-  await dispatch(postBasketThunk(item));  // məhsulu əlavə et
-  dispatch(getBasketThunk());             // səbəti yenilə
+const AddBasket = async (item) => {
+  const itemWithQuantity = { ...item, quantity: 1 }; // 👈 quantity əlavə olunur
+  await dispatch(postBasketThunk(itemWithQuantity));  // səbətə göndər
+  dispatch(getBasketThunk()); // səbəti yenilə
 };
+
 
     // Filter + Sort
     const filteredProducts = products
