@@ -187,12 +187,103 @@ body {
 
 
 @media (max-width: 768px) {
+  .admin {
+    padding: 20px;
+    margin: 20px 10px;
+    gap: 30px;
+  }
+
+  .addSection {
+    align-items: center;
+  }
+
+  .addButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .form {
+    padding: 15px;
+    gap: 12px;
+  }
+
+  .form label {
+    font-size: 13px;
+  }
+
+  .form input,
+  .select {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .submitButton {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .controlPanel {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .productTable th,
+  .productTable td {
+    padding: 10px;
+    font-size: 14px;
+  }
+
   .productImage {
     width: 100px;
     height: 80px;
   }
 
-  .form {
+  .deleteButton {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .admin {
     padding: 15px;
+    margin: 15px 5px;
+    gap: 25px;
+  }
+
+  .form {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .form label {
+    font-size: 12px;
+  }
+
+  .form input,
+  .select {
+    font-size: 13px;
+  }
+
+  .submitButton {
+    font-size: 14px;
+  }
+
+  .productTable th,
+  .productTable td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .productImage {
+    width: 80px;
+    height: 60px;
+  }
+
+  .deleteButton {
+    padding: 5px 10px;
+    font-size: 12px;
   }
 }
