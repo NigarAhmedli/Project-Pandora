@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../../../../redux/reducers/authSlice';
-import styless from './Login.module.scss'; 
+import styless from './Login.module.scss';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,7 +12,6 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // Refresh zamanı input-ları sıfırla
   useEffect(() => {
     setEmail('');
     setPassword('');
@@ -20,8 +19,12 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(loginUser({ email, password }));
-    navigate('/profile');
+
+    const result = await dispatch(loginUser({ email, password }));
+
+    if (!result.error) {
+      navigate('/profile');
+    }
   };
 
   const goToRegister = () => {
@@ -40,7 +43,7 @@ const Login = () => {
 
         {error && (
           <p className={styless['error-message']}>
-            {error.message || 'Xəta baş verdi'}
+            {typeof error === 'string' ? error : error.message || 'Xəta baş verdi'}
           </p>
         )}
 

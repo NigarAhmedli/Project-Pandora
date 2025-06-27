@@ -3,6 +3,7 @@ import styles from './Profile.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser, getUser } from '../../../../redux/reducers/authSlice';
+import Header from '../../../../components/common/header/Header';
 
 const Profile = () => {
   const { user, loading } = useSelector((state) => state.auth);
@@ -26,6 +27,8 @@ const Profile = () => {
   if (!user) return <p className={styles.error}>Istifadəçi tapılmadı.</p>;
 
   return (
+    <>
+    <Header/>
     <div className={styles.profileContainer}>
       <div className={styles.card}>
       <img
@@ -48,6 +51,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

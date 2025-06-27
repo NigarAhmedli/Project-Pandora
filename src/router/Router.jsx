@@ -25,6 +25,8 @@ import CollectionSec from "../pages/home/addSection/collectionsSec/CollectionSec
 import EditProfile from "../pages/home/addSection/editProfile/EditProfile";
 import AdminRoute from "../routes/AdminRoute";
 import Dashboard from "../pages/home/addSection/adminPanel/dashboard/Dashboard";
+import AdminSec from "../pages/home/addSection/adminPanel/container/AdminSec";
+import Chart from "../pages/home/addSection/adminPanel/chart/Chart";
 
 const Router = () => {
   return (
@@ -65,6 +67,9 @@ const Router = () => {
            <Route path='/payment' element={<Payment/>} />
             <Route path='/payment-success' element={<Succes/>} />
              <Route path='*' element={<NotFound/>} />
+             <Route path='/products' element={<AdminSec/>}/>
+             <Route path="/users" element={<Dashboard/>}/>
+             <Route path="/chart" element={<Chart/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -9,6 +9,8 @@ import { getBraceletThunk, postBraceletThunk, deleteBraceletThunk } from '../../
 import { deleteNecklacesThunk, getNecklacesThunk, postNecklacesThunk } from '../../../../../redux/reducers/necklacesSlice';
 import { deleteCollectionThunk, getCollectionThunk, postCollectionThunk } from '../../../../../redux/reducers/collectionSlice';
 import { deleteRingsThunk, getRingsThunk, postRingsThunk } from '../../../../../redux/reducers/ringsSlice';
+import AdminHeader from '../adminHeader/AdminHeader';
+import Header from '../../../../../components/common/header/Header';
 
 
 const AdminSec = () => {
@@ -181,6 +183,8 @@ onSubmit: async (values, { resetForm }) => {
   if (error) return <p className={styles.error}>Xəta baş verdi......</p>;
 
   return (
+    <>
+    
     <div className={styles.admin}>
       <div className={styles.addSection}>
         <button className={styles.addButton} onClick={toggleFormVisibility}>
@@ -419,6 +423,7 @@ onSubmit: async (values, { resetForm }) => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 
